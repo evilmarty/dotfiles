@@ -10,7 +10,7 @@ alias rtest='ruby -Itest'
 
 eval "$(hub alias -s bash)"
 
-export PATH="$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 export CLICOLOR=1
