@@ -2,6 +2,8 @@
 
 export EDITOR="subl"
 
+alias ll='ls -l'
+
 alias gitl='git log'
 alias gits='git status'
 alias gitc='git commit'
