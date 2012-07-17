@@ -10,8 +10,11 @@ ln -sf $DIR/inputrc $HOME/.inputrc
 
 ln -sf $DIR/irbrc $HOME/.irbrc
 
-ln -sf $DIR/vim $HOME/.vim
 ln -sf $HOME/.vim/vimrc $HOME/.vimrc
 ln -sf $HOME/.vim/gvimrc $HOME/.gvimrc
 
 cp -iv $DIR/gitconfig $HOME/.gitconfig
+
+git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
+
+vim +BundleInstall +qall
