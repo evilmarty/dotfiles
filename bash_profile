@@ -22,6 +22,11 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
+for file in *.bash
+do
+  . $file
+done
+
 __git_ps1 () 
 { 
   local b="$(git symbolic-ref HEAD 2>/dev/null)";
