@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+DOTFILES_DIR=$HOME/.dotfiles
+
 export EDITOR="subl"
 
 alias ll='ls -l'
@@ -22,7 +24,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion
 fi
 
-for file in *.bash
+for file in $DOTFILES_DIR/*.bash
 do
   . $file
 done
