@@ -5,10 +5,14 @@ DOTFILES_DIR=$HOME/.dotfiles
 export EDITOR="subl"
 
 alias ll='ls -l'
-
+# Git aliases
 alias gitl='git log'
 alias gits='git status'
 alias gitc='git commit'
+# Bundler aliases
+alias be='bundle exec'
+alias bi='bundle install'
+alias bu='bundle update'
 
 alias rtest='ruby -Itest'
 
