@@ -9,10 +9,12 @@ alias ll='ls -l'
 alias gitl='git log'
 alias gits='git status'
 alias gitc='git commit'
+alias gitp='git pull'
 # Bundler aliases
 alias be='bundle exec'
 alias bi='bundle install'
 alias bu='bundle update'
+alias bo='bundle open'
 
 alias rtest='ruby -Itest'
 
