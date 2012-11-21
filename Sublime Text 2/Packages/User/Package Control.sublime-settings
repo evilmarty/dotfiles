@@ -1,0 +1,21 @@
+{
+	"auto_upgrade_last_run": 1353495650,
+	"installed_packages":
+	[
+		"Alignment",
+		"ChangeQuotes",
+		"CoffeeScript",
+		"CTags",
+		"DocBlockr",
+		"Git",
+		"Handlebars",
+		"Nettuts+ Fetch",
+		"Package Control",
+		"Sass",
+		"SideBarEnhancements",
+		"SublimeCodeIntel",
+		"SublimeLinter",
+		"Tag",
+		"Theme - Soda"
+	]
+}
