@@ -22,10 +22,11 @@
 		".DS_Store",
 		"*.class",
 		"*.psd",
-		"*.db"
+		"*.db",
+		"*.scssc"
 	],
 	"ignored_packages": ["Vintage"],
-	"soda_classic_tabs": true,
+	"soda_classic_tabs": false,
 	"tab_size": 2,
 	"theme": "Soda Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
