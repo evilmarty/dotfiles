@@ -10,6 +10,7 @@ alias gitl='git log'
 alias gits='git status'
 alias gitc='git commit'
 alias gitp='git pull'
+alias git-prune-merged-branches='git branch --merged | grep -v "\*" | xargs -n 1 git branch -d'
 # Bundler aliases
 alias be='bundle exec'
 alias bi='bundle install'
