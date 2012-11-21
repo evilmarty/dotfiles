@@ -1,0 +1,13 @@
+<snippet>
+  <content><![CDATA[
+require 'test_helper'
+
+class ${1:name}Test < ActiveSupport::TestCase
+  test "${2:description}" do
+    ${0}
+  end
+end
+]]></content>
+  <tabTrigger>require 'test_helper'</tabTrigger>
+  <scope>source.ruby</scope>
+</snippet>
