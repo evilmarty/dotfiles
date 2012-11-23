@@ -28,6 +28,8 @@ then
   ln -s $DIR/Sublime\ Text\ 2/Pristine\ Packages $SUBLIME_TEXT_DIR/Pristine\ Packages
 fi
 
+ln -sf $DIR/com.googlecode.iterm2.plist ~/Library/Preferences/
+
 git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
 
 vim +BundleInstall +qall
