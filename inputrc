@@ -1,1 +1,5 @@
 set completion-ignore-case on
+
+[Select all]
+"\e[1;5C": forward-word
+"\e[1;5D": backward-word
