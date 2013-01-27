@@ -2,8 +2,6 @@
 
 DOTFILES_DIR=$HOME/.dotfiles
 
-export EDITOR="subl"
-
 alias ll='ls -l'
 # Git aliases
 alias gitl='git log'
@@ -21,9 +19,19 @@ alias rtest='ruby -Itest'
 
 eval "$(hub alias -s bash)"
 
-export PATH="$HOME/.bin:$HOME/.rbenv/bin:$PATH:$HOME/node_modules/.bin"
-eval "$(rbenv init -)"
+# Enable rbenv if available
+if [ -d $HOME/.rbenv ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
 
+# Add NPM to path if available
+if [ -d $HOME/node_modules ]; then
+  export PATH="$PATH:$HOME/node_modules/.bin"
+fi
+
+export PATH="$HOME/.bin:$PATH"
+export EDITOR="subl"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
@@ -33,7 +41,7 @@ fi
 
 for file in $DOTFILES_DIR/*.bash
 do
-  . $file
+  source $file
 done
 
 __git_ps1 () 
