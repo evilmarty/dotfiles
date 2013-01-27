@@ -21,7 +21,7 @@ alias rtest='ruby -Itest'
 
 eval "$(hub alias -s bash)"
 
-export PATH="$HOME/.bin:$HOME/.rbenv/bin:$PATH"
+export PATH="$HOME/.bin:$HOME/.rbenv/bin:$PATH:$HOME/node_modules/.bin"
 eval "$(rbenv init -)"
 
 export CLICOLOR=1
