@@ -19,6 +19,9 @@ alias rtest='ruby -Itest'
 
 eval "$(hub alias -s bash)"
 
+# Fix path ordering
+export PATH="/usr/local/bin:$PATH"
+
 # Enable rbenv if available
 if [ -d $HOME/.rbenv ]; then
   export PATH="$HOME/.rbenv/bin:$PATH"
