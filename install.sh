@@ -20,7 +20,7 @@ rm -f $HOME/.gvimrc
 ln -sf $HOME/.vim/gvimrc $HOME/.gvimrc
 
 rm -f $HOME/.gitconfig
-cp -iv $DIR/gitconfig $HOME/.gitconfig
+ln -sf $DIR/gitconfig $HOME/.gitconfig
 
 read -p "Setup Sublime Text 2? " -n 1 -r
 if [[ $REPLY =~ ^[Yy]$ ]]

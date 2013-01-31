@@ -4,7 +4,7 @@
 	status = auto
 [color "branch"]
 	current = yellow reverse
-	local = yellow 
+	local = yellow
 	remote = green
 [color "diff"]
 	meta = yellow bold
@@ -18,15 +18,24 @@
 [core]
 	editor = vim
 	quotepath = false
+[branch]
+	autosetuprebase = always
 [push]
 	default = current
 [difftool]
 	prompt = false
+[mergetool]
+	keepBackup = false
+	prompt = false
+[merge]
+	tool = opendiff
 [alias]
 	s = status
 	co = checkout
 	cp = cherry-pick
 	c = commit -av
 	br = branch
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	l = log
+[include]
+  path = ~/.gitconfig.local
