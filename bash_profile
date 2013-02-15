@@ -34,6 +34,7 @@ fi
 
 export PATH="$HOME/.bin:$PATH"
 export EDITOR="subl"
+export LESSEDIT="subl %f"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
