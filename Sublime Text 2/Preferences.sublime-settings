@@ -26,6 +26,7 @@
 		"*.db",
 		"*.scssc"
 	],
+	"font_size": 12.0,
 	"highlight_line": true,
 	"ignored_packages":
 	[
@@ -35,5 +36,6 @@
 	"theme": "Soda Dark.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_automatic_white_space": true,
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"vintage_start_in_command_mode": true
 }
