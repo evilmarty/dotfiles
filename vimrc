@@ -8,7 +8,7 @@ Bundle 'gmarik/vundle'
 Bundle 'mileszs/ack.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
-Bundle 'wincent/Command-T'
+Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/upAndDown'
 Bundle 'altercation/vim-colors-solarized'
 
@@ -82,8 +82,8 @@ if has("gui_macvim")
   " Command-][ to increase/decrease indentation
   vmap <D-]> >gv
   vmap <D-[> <gv
-  " Command-T to CommandT
+  " Command-T to CtrlP
   macmenu &File.New\ Tab key=<nop>
-  map <D-t> :CommandT<CR>
+  map <D-t> :CtrlP<CR>
 endif
 
