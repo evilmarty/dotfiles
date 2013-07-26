@@ -11,6 +11,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/upAndDown'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'nanotech/jellybeans.vim'
 
 filetype plugin indent on
 
@@ -66,6 +67,9 @@ set undoreload=10000        " Number of lines to save
 let g:netrw_list_hide= '^\..*$' " Hide dotfiles
 let g:netrw_banner=0            " Disable banner
 let g:netrw_liststyle=3         " Tree
+
+" Theme
+colorscheme jellybeans
 
 " GUI
 if has("gui_running")
