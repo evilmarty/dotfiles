@@ -49,6 +49,8 @@ nmap <LEADER>l :set list!<CR>|"        Toggle list characters (Invisibles)
 map <LEADER>s :set spell!<CR>|"        Toggle spell
 map <LEADER>F :AckFromSearch!<Space>|" Search visual selection
 map <LEADER>f :Ack!<Space>|"           Search
+map <LEADER><left> :bprev<CR>|"        Previous buffer
+map <LEADER><right> :bnext<CR>|"       Next buffer
 
 " Window
 syntax enable       " Syntax highlighting
