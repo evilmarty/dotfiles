@@ -12,6 +12,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/upAndDown'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on
 
@@ -37,6 +38,8 @@ set shiftwidth=2
 set tabstop=2
 set foldmethod=indent         " Fold based on indentation.
 set foldlevelstart=99         " Expand all folds by default.
+
+autocmd BufWritePre <buffer> :%s/\s\+$//e " Strip whitespace from end of line
 
 " Disable backup. No swap files.
 set nobackup
@@ -89,7 +92,7 @@ if has("gui_macvim")
   vmap <D-]> >gv
   vmap <D-[> <gv
   " Command-T to CtrlP
-  macmenu &File.New\ Tab key=<nop>
+  "macmenu &File.New\ Tab key=<nop>
   map <D-t> :CtrlP<CR>
 endif
 
