@@ -12,6 +12,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/upAndDown'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'Valloric/YouCompleteMe'
 
 filetype plugin indent on
 
@@ -89,7 +90,7 @@ if has("gui_macvim")
   vmap <D-]> >gv
   vmap <D-[> <gv
   " Command-T to CtrlP
-  macmenu &File.New\ Tab key=<nop>
+  "macmenu &File.New\ Tab key=<nop>
   map <D-t> :CtrlP<CR>
 endif
 
