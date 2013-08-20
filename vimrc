@@ -13,6 +13,7 @@ Bundle 'vim-scripts/upAndDown'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'Valloric/YouCompleteMe'
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on
 
@@ -38,6 +39,8 @@ set shiftwidth=2
 set tabstop=2
 set foldmethod=indent         " Fold based on indentation.
 set foldlevelstart=99         " Expand all folds by default.
+
+autocmd BufWritePre <buffer> :%s/\s\+$//e " Strip whitespace from end of line
 
 " Disable backup. No swap files.
 set nobackup
