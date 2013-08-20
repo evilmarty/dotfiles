@@ -2,66 +2,19 @@
 
 DOTFILES_DIR=$HOME/.dotfiles
 
-alias ll='ls -l'
-# Git aliases
-alias gitl='git log'
-alias gits='git status'
-alias gitc='git commit'
-alias gitp='git pull'
-# Bundler aliases
-alias be='bundle exec'
-alias bi='bundle install'
-alias bu='bundle update'
-alias bo='bundle open'
-
-alias rtest='ruby -Itest'
-
-eval "$(hub alias -s bash)"
-
 # Fix path ordering
-export PATH="bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
-
-# Enable rbenv if available
-if [ -d $HOME/.rbenv ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
-
-# Add NPM to path if available
-if [ -d $HOME/node_modules ]; then
-  export PATH="$PATH:$HOME/node_modules/.bin"
-fi
-
-export PATH="$HOME/.bin:$PATH"
-export EDITOR="subl"
-export LESSEDIT="subl %f"
+export PATH="bin:$HOME/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
+export EDITOR="vim"
+export LESSEDIT="vim %f"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+  source `brew --prefix`/etc/bash_completion
 fi
 
-for file in $DOTFILES_DIR/*.bash
-do
-  source $file
-done
-
-__git_ps1 () 
-{ 
-  local b="$(git symbolic-ref HEAD 2>/dev/null)";
-  if [ -n "$b" ]; then
-    printf " (%s)" "${b##refs/heads/}";
-  fi
-}
-
-__rbenv_ps1 ()
-{
-  local b="$(rbenv version-name)";
-  if [ -n "$b" ]; then
-    printf " [%s]" "$b"
-  fi
-}
+# Source all shell files
+for f in $DOTFILES_DIR/shell/*/*; do source $f; done
 
 ### COLOURS ###
 txtblk="\[\e[0;30m\]" # Black - Regular
