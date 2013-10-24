@@ -38,6 +38,7 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   l = log
   a = commit -v --amend
+  nb = checkout -b
 [include]
   path = ~/.gitconfig.local
 [diff]
