@@ -9,12 +9,12 @@ Bundle 'mileszs/ack.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
-Bundle 'vim-scripts/upAndDown'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'matze/vim-move'
+Bundle 'mustache/vim-mode'
 
 filetype plugin indent on
 
@@ -96,5 +96,8 @@ if has("gui_macvim")
   " Command-T to CtrlP
   "macmenu &File.New\ Tab key=<nop>
   map <D-t> :CtrlP<CR>
+else
+  " Copy to OSX clipboard when not running Macvim
+  vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
+  nmap <C-v> :call setreg("\"",system("pbpaste"))<CR><CR>p
 endif
-
