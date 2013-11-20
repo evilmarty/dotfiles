@@ -5,7 +5,7 @@
 	"ensure_newline_at_eof_on_save": false,
 	"file_exclude_patterns":
 	[
-		".*",
+		".git",
 		"*.pyc",
 		"*.pyo",
 		"*.exe",
