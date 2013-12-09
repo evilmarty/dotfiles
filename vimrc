@@ -56,6 +56,7 @@ map <LEADER>F :AckFromSearch!<Space>|" Search visual selection
 map <LEADER>f :Ack!<Space>|"           Search
 map <LEADER><left> :bprev<CR>|"        Previous buffer
 map <LEADER><right> :bnext<CR>|"       Next buffer
+nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>|" Edit file in same directory
 
 " Window
 syntax enable       " Syntax highlighting
