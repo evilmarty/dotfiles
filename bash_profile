@@ -3,7 +3,7 @@
 DOTFILES_DIR=$HOME/.dotfiles
 
 # Fix path ordering
-export PATH="bin:$HOME/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
+export PATH="$HOME/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
 export EDITOR="vim"
 export LESSEDIT="vim %f"
 export CLICOLOR=1
@@ -15,6 +15,8 @@ fi
 
 # Source all shell files
 for f in $DOTFILES_DIR/shell/*/*; do source $f; done
+
+export PATH="./bin:$PATH"
 
 ### COLOURS ###
 txtblk="\[\e[0;30m\]" # Black - Regular
