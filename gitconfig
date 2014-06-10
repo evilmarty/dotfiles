@@ -43,7 +43,11 @@
   wipe = reset --hard
   abort = rebase --abort
   cont = rebase --continue
+  yolo = push --force
 [include]
   path = ~/.gitconfig.local
 [diff]
 	algorithm = patience
+[filter "media"]
+	clean = git-media-clean %f
+	smudge = git-media-smudge %f
