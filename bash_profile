@@ -3,7 +3,7 @@
 DOTFILES_DIR=$HOME/.dotfiles
 
 # Fix path ordering
-export PATH="$HOME/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
+export PATH="$HOME/.bin:./node_modules/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
 export EDITOR="vim"
 export LESSEDIT="vim %f"
 export CLICOLOR=1
