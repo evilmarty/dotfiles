@@ -54,6 +54,8 @@ bakwht="\[\e[47m\]"   # White
 txtrst="\[\e[0m\]"    # Text Reset
 
 ### PROMPT ###
+export GIT_PS1_SHOWDIRTYSTATE="1"
+export GIT_PS1_SHOWCOLORHINTS="1"
 # user@host: curdir (gitbranch) [rubyver]
 PS1="$txtgrn\u@\h: $txtblu\W$txtylw\$(__git_ps1)$txtred\$(__rbenv_ps1)$txtcyn\$$txtrst "
 
