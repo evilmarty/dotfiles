@@ -15,6 +15,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'matze/vim-move'
 Bundle 'mustache/vim-mode'
+Bundle 'bling/vim-airline'
 
 filetype plugin indent on
 
