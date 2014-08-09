@@ -75,6 +75,8 @@ set undoreload=10000        " Number of lines to save
 let g:netrw_list_hide= '^\..*$' " Hide dotfiles
 let g:netrw_banner=0            " Disable banner
 let g:netrw_liststyle=3         " Tree
+let g:netrw_sort_options="i"    " Ignore case when sorting
+let g:netrw_browse_split=0      " Open files in same window
 
 " Theme
 colorscheme jellybeans
