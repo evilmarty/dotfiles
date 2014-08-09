@@ -9,13 +9,15 @@ Bundle 'mileszs/ack.vim'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'matze/vim-move'
 Bundle 'mustache/vim-mode'
 Bundle 'bling/vim-airline'
+Bundle 'bling/vim-bufferline'
+Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 
 filetype plugin indent on
 
@@ -78,6 +80,10 @@ let g:netrw_banner=0            " Disable banner
 let g:netrw_liststyle=3         " Tree
 let g:netrw_sort_options="i"    " Ignore case when sorting
 let g:netrw_browse_split=0      " Open files in same window
+
+" Airline
+set laststatus=2
+let g:airline_powerline_fonts = 1
 
 " Theme
 colorscheme jellybeans
