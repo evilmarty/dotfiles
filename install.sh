@@ -32,9 +32,6 @@ then
   ln -s $DIR $SUBLIME_TEXT_DIR/Packages/User
 fi
 
-rm -f $HOME/Library/Preferences/com.googlecode.iterm2.plist
-ln -sf $DIR/com.googlecode.iterm2.plist $HOME/Library/Preferences/
-
 git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle
 
 vim +BundleInstall +qall
