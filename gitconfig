@@ -47,10 +47,11 @@
 [include]
   path = ~/.gitconfig.local
 [diff]
-	algorithm = patience
+  algorithm = patience
 [filter "media"]
-	clean = git-media-clean %f
-	smudge = git-media-smudge %f
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
 [user]
-	email = marty@zalega.me
-	name = Marty Zalega
+  email = marty@zalega.me
+  name = Marty Zalega
+
