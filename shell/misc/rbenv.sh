@@ -1,6 +1,7 @@
 # Enable rbenv if available
-if [ -d $HOME/.rbenv ]; then
-  export PATH="$HOME/.rbenv/bin:$PATH"
+export RBENV_ROOT=$(rbenv root)
+if [ -d $RBENV_ROOT ]; then
+  export PATH="$RBENV_ROOT/bin:$PATH"
   eval "$(rbenv init -)"
 fi
 
