@@ -23,6 +23,8 @@ filetype plugin indent on
 
 runtime macros/matchit.vim " Match pairs of keywords (Eg: def, end)
 
+set backspace=2
+
 " Wildmenu
 set wildmenu
 set wildmode=longest,full
@@ -111,3 +113,12 @@ else
   vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
   nmap <C-v> :call setreg("\"",system("pbpaste"))<CR><CR>p
 endif
+
+" CtrlP
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
+    \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
+
