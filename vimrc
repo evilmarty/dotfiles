@@ -56,19 +56,21 @@ set nowb
 set noswapfile
 
 " Bindings
-nnoremap <LEADER>n :n .<CR>|"          Open the filer manager at the current working directory
-nmap <LEADER>l :set list!<CR>|"        Toggle list characters (Invisibles)
-map <LEADER>s :set spell!<CR>|"        Toggle spell
-map <LEADER>F :AckFromSearch!<Space>|" Search visual selection
-map <LEADER>f :Ack!<Space>|"           Search
-map <LEADER><left> :bprev<CR>|"        Previous buffer
-map <LEADER><right> :bnext<CR>|"       Next buffer
-nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>|" Edit file in same directory
+nnoremap <LEADER>n :n .<CR>|                           " Open the filer manager at the current working directory
+nmap <LEADER>l :set list!<CR>|                         " Toggle list characters (Invisibles)
+map <LEADER>S :set spell!<CR>|                         " Toggle spell
+map <LEADER>F :AckFromSearch!<Space>|                  " Search visual selection
+map <LEADER>f :Ack!<Space>|                            " Search
+map <LEADER><left> :bprev<CR>|                         " Previous buffer
+map <LEADER><right> :bnext<CR>|                        " Next buffer
+nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/|                " Search for word under cursor and substitute
 
 " Window
 syntax enable       " Syntax highlighting
 set hidden          " Allow hiding buffers with unsaved changes
 set number          " Show line numbers
+set relativenumber  " Show relative line numbers to current line
 set ruler           " Show cursor position
 set spelllang=en_au " Australian English
 
