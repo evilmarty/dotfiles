@@ -18,6 +18,8 @@ Bundle 'bling/vim-airline'
 Bundle 'bling/vim-bufferline'
 Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'groenewege/vim-less'
+Bundle 'vim-ruby/vim-ruby'
 
 filetype plugin indent on
 
