@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-DOTFILES_DIR=$HOME/.dotfiles
+DOTFILES_DIR=$HOME/.files
 
 # Fix path ordering
 export PATH="$HOME/.bin:./node_modules/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
