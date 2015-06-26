@@ -2,16 +2,13 @@ LINK=ln -sf $(CURDIR)
 BUNDLE_PATH=$(HOME)/.vim/bundle
 VUNDLE_URL=https://github.com/gmarik/vundle.git
 
-install: bash_profile inputrc irbrc git vim
+install: bash_profile inputrc git vim
 
 bash_profile:
 	$(LINK)/bash_profile $(HOME)/.bash_profile
 
 inputrc:
 	$(LINK)/inputrc $(HOME)/.inputrc
-
-irbrc:
-	$(LINK)/irbrc $(HOME)/.irbrc
 
 git:
 	$(LINK)/gitconfig $(HOME)/.gitconfig
