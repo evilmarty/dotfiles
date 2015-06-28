@@ -20,6 +20,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'groenewege/vim-less'
 Bundle 'vim-ruby/vim-ruby'
+Bundle 'edkolev/promptline.vim'
 
 filetype plugin indent on
 
