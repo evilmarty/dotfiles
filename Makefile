@@ -1,6 +1,7 @@
 LINK=ln -sf $(CURDIR)
 BUNDLE_PATH=$(HOME)/.vim/bundle
-VUNDLE_URL=https://github.com/gmarik/vundle.git
+VUNDLE_PATH=$(BUNDLE_PATH)/Vundle.vim
+VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
 
 install: bash_profile inputrc git vim
 
@@ -18,7 +19,7 @@ vim:
 	$(LINK)/vimrc $(HOME)/.vimrc
 	$(LINK)/vimrc $(HOME)/.gvimrc
 	mkdir -p $(BUNDLE_PATH)
-	if [ ! -d $(BUNDLE_PATH)/vundle ]; then git clone -q -n $(VUNDLE_URL) $(BUNDLE_PATH)/vundle 2> /dev/null; fi
-	vim +BundleInstall +qall
+	if [ ! -d $(VUNDLE_PATH) ]; then git clone -q -n $(VUNDLE_URL) $(VUNDLE_PATH) 2> /dev/null; fi
+	vim +PluginInstall +qall
 
 
