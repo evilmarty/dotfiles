@@ -21,6 +21,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'groenewege/vim-less'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'edkolev/promptline.vim'
 
 call vundle#end()
 filetype plugin indent on
