@@ -21,6 +21,6 @@ for f in $DOTFILES_DIR/shell/*/*; do source $f; done
 
 export PATH="./bin:$PATH"
 
-if [ -r "$HOME/.bashrc" ] ; then
-  source "$HOME/.bashrc"
-fi
+for file in $HOME/.{bash_prompt,bashrc}; do
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
