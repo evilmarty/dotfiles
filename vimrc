@@ -1,26 +1,28 @@
 " Vundle
+set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/Vundle.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-surround'
-Bundle 'kien/ctrlp.vim'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'matze/vim-move'
-Bundle 'mustache/vim-mode'
-Bundle 'bling/vim-airline'
-Bundle 'bling/vim-bufferline'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'groenewege/vim-less'
-Bundle 'vim-ruby/vim-ruby'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-surround'
+Plugin 'kien/ctrlp.vim'
+Plugin 'nanotech/jellybeans.vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'matze/vim-move'
+Plugin 'mustache/vim-mode'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'groenewege/vim-less'
+Plugin 'vim-ruby/vim-ruby'
 
+call vundle#end()
 filetype plugin indent on
 
 runtime macros/matchit.vim " Match pairs of keywords (Eg: def, end)

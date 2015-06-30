@@ -19,7 +19,7 @@ vim:
 	$(LINK)/vimrc $(HOME)/.vimrc
 	$(LINK)/vimrc $(HOME)/.gvimrc
 	mkdir -p $(BUNDLE_PATH)
-	if [ ! -d $(VUNDLE_PATH) ]; then git clone -q -n $(VUNDLE_URL) $(VUNDLE_PATH) 2> /dev/null; fi
+	if [ ! -d $(VUNDLE_PATH) ]; then git clone -q $(VUNDLE_URL) $(VUNDLE_PATH) 2> /dev/null; fi
 	vim +PluginInstall +qall
 
 
