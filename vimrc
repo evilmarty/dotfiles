@@ -19,6 +19,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'groenewege/vim-less'
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'fatih/vim-go'
 Plugin 'edkolev/promptline.vim'
 
 call vundle#end()
