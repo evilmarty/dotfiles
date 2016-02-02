@@ -44,6 +44,7 @@
   abort = rebase --abort
   cont = rebase --continue
   yolo = push --force
+  pop = stash pop
 [include]
   path = ~/.gitconfig.local
 [diff]
