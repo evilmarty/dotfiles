@@ -3,8 +3,16 @@ BUNDLE_PATH=$(HOME)/.vim/bundle
 VUNDLE_PATH=$(BUNDLE_PATH)/Vundle.vim
 VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
 PROMPT_THEME?=jelly
+HOMEBREW=$(shell which brew)
 
-install: bash_profile inputrc git vim prompt
+install: homebrew bash_profile inputrc git vim prompt
+
+homebrew: $(HOMEBREW)
+ifndef HOMEBREW
+	/usr/bin/ruby -e "$(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+endif
+	brew tap-info homebrew/bundle 2> /dev/null || brew tap homebrew/bundle
+	brew bundle
 
 bash_profile: FORCE
 	$(LINK)/bash_profile $(HOME)/.bash_profile
