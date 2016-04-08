@@ -67,6 +67,8 @@ map <LEADER><left> :bprev<CR>|                         " Previous buffer
 map <LEADER><right> :bnext<CR>|                        " Next buffer
 nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/|                " Search for word under cursor and substitute
+nnoremap // *<CR>                                      " Search for word under cursor
+vnoremap // y/<C-R>"<CR>                               " Search for selection
 
 " Window
 syntax enable       " Syntax highlighting
