@@ -35,6 +35,7 @@
   cp = cherry-pick
   c = commit -av
   cm = commit -m
+  fu = commit --fixup
   br = branch
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   l = log
@@ -45,6 +46,7 @@
   cont = rebase --continue
   yolo = push --force
   pop = stash pop
+  squash = rebase --autosquash -i
 [include]
   path = ~/.gitconfig.local
 [diff]
