@@ -1,4 +1,5 @@
 set completion-ignore-case on
+set colored-stats on
 
 # [Select all]
 "\e[1;5C": forward-word
