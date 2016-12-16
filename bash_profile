@@ -5,7 +5,7 @@ BREW_PATH=$(which brew)
 
 # Fix path ordering
 export PATH="$HOME/.bin:./node_modules/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
-export EDITOR="vim"
+export EDITOR="nvim"
 export LESSEDIT="vim %f"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad

@@ -16,7 +16,7 @@
   changed = green
   untracked = cyan
 [core]
-  editor = vim
+  editor = nvim
   quotepath = false
 [branch]
   autosetuprebase = always
