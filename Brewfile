@@ -16,4 +16,5 @@ cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
 cask "veertu-desktop"            # VM manager which uses OSX's hypervisor
 
+mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
