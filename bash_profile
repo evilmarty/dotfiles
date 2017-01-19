@@ -4,8 +4,6 @@ DOTFILES_DIR=$HOME/.files
 
 # Fix path ordering
 export PATH="$HOME/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
-export EDITOR="nvim"
-export LESSEDIT="vim %f"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
