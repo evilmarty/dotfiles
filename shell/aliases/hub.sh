@@ -1,2 +1,2 @@
-eval "$(hub alias -s bash)"
+eval `hub alias -s bash`
 
