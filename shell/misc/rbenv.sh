@@ -1,7 +1,7 @@
-if [ -f "$(which rbenv)" ]; then
-  export RBENV_ROOT=$(rbenv root)
-  if [ -d $RBENV_ROOT ]; then
+if [ command -v rbenv >/dev/null 2>&1 ]; then
+  export RBENV_ROOT=`rbenv root`
+  if [ -d "$RBENV_ROOT" ]; then
     export PATH="$RBENV_ROOT/bin:$PATH"
-    eval "$(rbenv init -)"
+    eval `rbenv init -`
   fi
 fi
