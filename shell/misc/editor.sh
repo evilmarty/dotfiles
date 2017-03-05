@@ -1,5 +1,7 @@
-if [ command -v nvim >/dev/null 2>&1 ]; then
+if hash nvim 2>/dev/null; then
   export EDITOR='nvim'
   alias vim='nvim'
   alias vi='nvim'
+else
+  export EDITOR='vim'
 fi
