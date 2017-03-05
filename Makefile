@@ -7,12 +7,15 @@ HOMEBREW=$(shell which brew)
 
 install: homebrew bash_profile inputrc git vim prompt
 
-homebrew: $(HOMEBREW)
+homebrew: $(HOMEBREW) Brewfile
 ifndef HOMEBREW
 	/usr/bin/ruby -e "$(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 endif
 	brew tap-info homebrew/bundle 2> /dev/null || brew tap homebrew/bundle
-	brew bundle
+	brew bundle --global
+
+Brewfile: FORCE
+	$(LINK)/Brewfile $(HOME)/.Brewfile
 
 bash_profile: FORCE
 	$(LINK)/bash_profile $(HOME)/.bash_profile
