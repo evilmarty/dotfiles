@@ -1,7 +1,7 @@
-if [ command -v rbenv >/dev/null 2>&1 ]; then
+if hash rbenv 2>/dev/null; then
   export RBENV_ROOT=`rbenv root`
   if [ -d "$RBENV_ROOT" ]; then
     export PATH="$RBENV_ROOT/bin:$PATH"
-    eval `rbenv init -`
+    eval "$(rbenv init -)"
   fi
 fi
