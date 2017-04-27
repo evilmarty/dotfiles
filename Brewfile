@@ -2,6 +2,7 @@ tap "caskroom/fonts"
 tap "caskroom/cask"
 
 brew "bash"                      # Use latest bash
+brew "ag"                        # the_silver_searcher
 brew "git"
 brew "hub"                       # Enhance git
 brew "vim"                       # Don't use native vim

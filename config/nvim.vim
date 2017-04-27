@@ -21,6 +21,7 @@ if dein#load_state(expand('~/.nvim'))
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('mileszs/ack.vim')
 
   call dein#end()
   call dein#save_state()
@@ -92,3 +93,5 @@ nnoremap <LEADER><ESC> :nohlsearch<CR>|                " Clear search
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
+" Use the_silver_searcher
+let g:ackprg = 'ag --vimgrep'
