@@ -22,6 +22,7 @@ if dein#load_state(expand('~/.nvim'))
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('mileszs/ack.vim')
+  call dein#add('hashivim/vim-terraform')
 
   call dein#end()
   call dein#save_state()
