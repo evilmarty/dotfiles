@@ -9,7 +9,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-surround'
 Plugin 'kien/ctrlp.vim'
-Plugin 'nanotech/jellybeans.vim'
+Plugin 'KeitaNakamura/neodark.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'matze/vim-move'
 Plugin 'mustache/vim-mode'
@@ -95,7 +95,7 @@ set laststatus=2
 let g:airline_powerline_fonts = 1
 
 " Theme
-colorscheme jellybeans
+colorscheme neodark
 
 " GUI
 if has("gui_running")
