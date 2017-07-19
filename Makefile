@@ -6,7 +6,7 @@ CONFIG_PATH=$(HOME)/.config
 PROMPT_THEME?=jelly
 HOMEBREW=$(shell which brew)
 
-install: homebrew bash_profile inputrc git vim nvim prompt
+install: homebrew bash inputrc git vim nvim prompt
 
 homebrew: $(HOMEBREW) Brewfile
 ifndef HOMEBREW
@@ -18,8 +18,13 @@ endif
 Brewfile: FORCE
 	$(LINK)/Brewfile $(HOME)/.Brewfile
 
+bash: bash_profile bash_profile
+
 bash_profile: FORCE
 	$(LINK)/bash_profile $(HOME)/.bash_profile
+
+bash_prompt: FORCE
+	$(LINK)/bash_prompt $(HOME)/.bash_prompt
 
 inputrc: FORCE
 	$(LINK)/inputrc $(HOME)/.inputrc
