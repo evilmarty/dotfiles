@@ -14,7 +14,7 @@ if dein#load_state(expand('~/.nvim'))
   call dein#add('Shougo/dein.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('tomtom/tcomment_vim')
-  call dein#add('KeitaNakamura/neodark.vim')
+  call dein#add('nanotech/jellybeans.vim')
   call dein#add('fatih/vim-go')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ctrlpvim/ctrlp.vim')
@@ -41,11 +41,10 @@ if (has("termguicolors"))
 endif
 
 " Theme
-colorscheme neodark
-let g:neodark#background = '#000000'
-let g:neodark#terminal_transparent = 1
-let g:neodark#solid_vertsplit = 1
-let g:airline_powerline_fonts = 1
+colorscheme jellybeans
+let g:jellybeans_use_term_italics = 1
+let g:jellybeans_use_term_background_color = 1
+let g:jellybeans_use_lowcolor_black = 1
 
 " Window
 syntax enable
