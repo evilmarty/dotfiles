@@ -3,10 +3,9 @@ BUNDLE_PATH=$(HOME)/.vim/bundle
 VUNDLE_PATH=$(BUNDLE_PATH)/Vundle.vim
 VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
 CONFIG_PATH=$(HOME)/.config
-PROMPT_THEME?=jelly
 HOMEBREW=$(shell which brew)
 
-install: homebrew bash inputrc git vim nvim prompt
+install: homebrew bash inputrc git vim nvim
 
 homebrew: $(HOMEBREW) Brewfile
 ifndef HOMEBREW
@@ -48,11 +47,5 @@ nvim: config
 
 config: $(CONFIG_PATH)
 	mkdir -p $(CONFIG_PATH)
-
-promptline: promptline/presets/custom.vim $(BUNDLE_PATH)/promptline.vim/*
-	cp promptline/presets/custom.vim $(BUNDLE_PATH)/promptline.vim/autoload/promptline/presets/
-
-prompt: promptline
-	vim +"PromptlineSnapshot! $(HOME)/.bash_prompt $(PROMPT_THEME) custom" +qall && echo "Bash prompt installed"
 
 FORCE:
