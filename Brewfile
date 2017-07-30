@@ -14,7 +14,6 @@ cask "firefox"
 cask "thunderbird"
 cask "vlc"
 cask "bittorrent"
-cask "font-sauce-code-powerline" # Use this font in terminal
 cask "iterm2"
 cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
