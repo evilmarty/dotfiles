@@ -8,6 +8,7 @@ brew "hub"                       # Enhance git
 brew "vim"                       # Don't use native vim
 brew "neovim/neovim/neovim"
 brew "yarn"
+brew "tmux"
 
 cask "firefox"
 cask "thunderbird"
