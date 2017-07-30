@@ -5,7 +5,7 @@ VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
 CONFIG_PATH=$(HOME)/.config
 HOMEBREW=$(shell which brew)
 
-install: homebrew bash inputrc git vim nvim
+install: homebrew bash inputrc git vim nvim iterm
 
 homebrew: $(HOMEBREW) Brewfile
 ifndef HOMEBREW
@@ -44,6 +44,10 @@ nvim: config
 	$(LINK)/config/nvim.vim $(CONFIG_PATH)/nvim/init.vim
 	pip3 install --upgrade neovim
 	nvim -c 'call dein#install()'
+
+iterm: FORCE
+	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(CURDIR)/iTerm"
+	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 config: $(CONFIG_PATH)
 	mkdir -p $(CONFIG_PATH)
