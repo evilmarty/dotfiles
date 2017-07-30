@@ -43,8 +43,10 @@ endif
 " Theme
 colorscheme jellybeans
 let g:jellybeans_use_term_italics = 1
-let g:jellybeans_use_term_background_color = 1
 let g:jellybeans_use_lowcolor_black = 1
+let g:jellybeans_overrides = {
+\  'background': { 'ctermbg': 'none', '256ctermbg': 'none', 'guibg': 'none' },
+\}
 
 " Window
 syntax enable
