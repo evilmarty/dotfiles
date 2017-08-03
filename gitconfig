@@ -1,34 +1,3 @@
-[color]
-  branch = auto
-  diff = auto
-  status = auto
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-[color "diff"]
-  meta = yellow bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-[color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
-[core]
-  editor = nvim
-  quotepath = false
-[branch]
-  autosetuprebase = always
-[push]
-  default = current
-[difftool]
-  prompt = false
-[mergetool]
-  keepBackup = false
-  prompt = false
-[merge]
-  tool = opendiff
 [alias]
   s = status
   co = checkout
@@ -39,7 +8,7 @@
   br = branch
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   l = log
-  a = commit -v --amend
+  a = commit -v --amend --reuse-message=HEAD
   nb = checkout -b
   wipe = reset --hard
   abort = rebase --abort
@@ -47,13 +16,83 @@
   yolo = push --force
   pop = stash pop
   squash = rebase --autosquash -i
-[include]
-  path = ~/.gitconfig.local
+  go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+
+[apply]
+  whitespace = fix
+
+[branch]
+  autosetuprebase = always
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[commit]
+  gpgsign = true
+
+[core]
+  editor = nvim
+  quotepath = false
+  trustctime = false
+  precomposeunicode = false
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
 [diff]
   algorithm = patience
+  renames = copies
+
+[diff "bin"]
+  textconv = hexdump -v -C
+
+[difftool]
+  prompt = false
+
 [filter "media"]
   clean = git-media-clean %f
   smudge = git-media-smudge %f
+
+[help]
+  autocorrect = 1
+
+[include]
+  path = ~/.gitconfig.local
+
+[merge]
+  tool = opendiff
+
+[mergetool]
+  keepBackup = false
+  prompt = false
+
+[push]
+  default = current
+
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+  insteadOf = "github:"
+
 [user]
   email = marty@zalega.me
   name = Marty Zalega
