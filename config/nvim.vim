@@ -107,5 +107,10 @@ let g:netrw_winsize = 25
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
+" Terraform
+let g:terraform_fmt_on_save = 1
+" Fix up comments in Terraform files
+autocmd FileType terraform setlocal commentstring=#%s
+
 " Use the_silver_searcher
 let g:ackprg = 'ag --vimgrep'
