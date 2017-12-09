@@ -29,8 +29,8 @@ inputrc: FORCE
 	$(LINK)/inputrc $(HOME)/.inputrc
 
 git: FORCE
-	$(LINK)/gitconfig $(HOME)/.gitconfig
-	$(LINK)/gitignore_global $(HOME)/.gitignore_global
+	$(LINK)/.gitconfig $(HOME)/.gitconfig
+	$(LINK)/.gitignore_global $(HOME)/.gitignore_global
 
 vim: FORCE
 	$(LINK)/.vimrc $(HOME)/.vimrc
