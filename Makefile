@@ -33,8 +33,8 @@ git: FORCE
 	$(LINK)/gitignore_global $(HOME)/.gitignore_global
 
 vim: FORCE
-	$(LINK)/vimrc $(HOME)/.vimrc
-	$(LINK)/vimrc $(HOME)/.gvimrc
+	$(LINK)/.vimrc $(HOME)/.vimrc
+	$(LINK)/.vimrc $(HOME)/.gvimrc
 	mkdir -p $(BUNDLE_PATH)
 	if [ ! -d $(VUNDLE_PATH) ]; then git clone -q $(VUNDLE_URL) $(VUNDLE_PATH) 2> /dev/null; fi
 	vim +PluginInstall +qall
