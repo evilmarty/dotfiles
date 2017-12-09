@@ -3,7 +3,7 @@
 DOTFILES_DIR=$HOME/.files
 
 # Fix path ordering
-export PATH="$HOME/.bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/share/npm/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
