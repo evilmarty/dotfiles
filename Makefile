@@ -41,7 +41,7 @@ vim: FORCE
 
 nvim: config
 	mkdir -p $(CONFIG_PATH)/nvim
-	$(LINK)/config/nvim.vim $(CONFIG_PATH)/nvim/init.vim
+	$(LINK)/.config/nvim/nvim.vim $(CONFIG_PATH)/nvim/init.vim
 	pip3 install --upgrade neovim
 	nvim -c 'call dein#install()'
 
