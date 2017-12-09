@@ -26,7 +26,7 @@ bash_prompt: FORCE
 	$(LINK)/.bash_prompt $(HOME)/.bash_prompt
 
 inputrc: FORCE
-	$(LINK)/inputrc $(HOME)/.inputrc
+	$(LINK)/.inputrc $(HOME)/.inputrc
 
 git: FORCE
 	$(LINK)/.gitconfig $(HOME)/.gitconfig
