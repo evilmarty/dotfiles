@@ -5,7 +5,7 @@ VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
 CONFIG_PATH=$(HOME)/.config
 HOMEBREW=$(shell which brew)
 
-install: homebrew bash inputrc git vim nvim iterm
+install: homebrew bash inputrc git vim nvim tmux iterm
 
 homebrew: $(HOMEBREW) Brewfile
 ifndef HOMEBREW
@@ -44,6 +44,9 @@ nvim: config
 	$(LINK)/.config/nvim/nvim.vim $(CONFIG_PATH)/nvim/init.vim
 	pip3 install --upgrade neovim
 	nvim -c 'call dein#install()'
+
+tmux: FORCE
+	$(LINK)/.tmux.conf $(HOME)/.tmux.conf
 
 iterm: config
 	mkdir -p $(CONFIG_PATH)/iterm
