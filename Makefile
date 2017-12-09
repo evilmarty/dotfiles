@@ -45,8 +45,10 @@ nvim: config
 	pip3 install --upgrade neovim
 	nvim -c 'call dein#install()'
 
-iterm: FORCE
-	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(CURDIR)/iTerm"
+iterm: config
+	mkdir -p $(CONFIG_PATH)/iterm
+	$(LINK)/.config/iterm/com.googlecode.iterm2.plist $(CONFIG_PATH)/iterm/com.googlecode.iterm2.plist
+	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(CONFIG_PATH)/iterm"
 	defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 
 config: $(CONFIG_PATH)
