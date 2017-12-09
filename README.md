@@ -1,20 +1,21 @@
 # Marty's Dot Files
 
-Contained is the epitome of evil, a collection of files and configurations, that make up my Bash environment. Use it if you dare.
+What was once a mere aggregation of configuration files is now the foundation of my home.
 
 __Note__ use at your own risk.
 
+## What's included:
+
+* Vim/Neovim configuration
+* Tmux configuration
+* Git configuration
+* Bash configuration
+* Application installation (via Homebrew)
+* Various scripts
+
 ## Installation
 
-Run the following commands to get started becoming evil. Any files that already exist will prompt you to overwrite.
-
 ```
-git clone git://github.com/evilmarty/dotfiles ~/.dotfiles
-cd ~/.dotfiles
-sh install.sh
+git clone git://github.com/evilmarty/dotfiles ~
+make
 ```
-
-## Todo
-
-I need to reorganise my Vim setup as it's no longer my primary editor and should recommission it for remote editing and terminal modifications where a gui editor cannot be used.
- 
