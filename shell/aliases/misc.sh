@@ -1,7 +1,0 @@
-alias ls='ls --color=auto'
-alias ll='ls -GFlash'
-alias tree='tree -C'
-alias vim='nvim'
-alias vi='nvim'
-alias lockscreen='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
-alias docker-clean='docker images --quiet --filter "dangling=true" | xargs docker rmi'
