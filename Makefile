@@ -15,7 +15,7 @@ endif
 	brew bundle --global
 
 Brewfile: FORCE
-	$(LINK)/Brewfile $(HOME)/.Brewfile
+	$(LINK)/.Brewfile $(HOME)/.Brewfile
 
 bash: bash_profile bash_profile
 
