@@ -20,10 +20,10 @@ Brewfile: FORCE
 bash: bash_profile bash_profile
 
 bash_profile: FORCE
-	$(LINK)/bash_profile $(HOME)/.bash_profile
+	$(LINK)/.bash_profile $(HOME)/.bash_profile
 
 bash_prompt: FORCE
-	$(LINK)/bash_prompt $(HOME)/.bash_prompt
+	$(LINK)/.bash_prompt $(HOME)/.bash_prompt
 
 inputrc: FORCE
 	$(LINK)/inputrc $(HOME)/.inputrc
