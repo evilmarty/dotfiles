@@ -1,0 +1,1 @@
+alias rtest='ruby -Itest'
