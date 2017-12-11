@@ -1,0 +1,25 @@
+#!/bin/bash
+
+main() {
+  local branch=$(git rev-parse --abbrev-ref HEAD)
+  git-is-dirty && stash update "$branch" || update "$branch"
+}
+
+stash() {
+  git stash
+  command eval "$@"
+  git stash pop
+}
+
+update() {
+  [ "$1" == "master" ] || git checkout master
+
+  git pull origin
+
+  if [ "$1" != "master" ]; then
+    git checkout "$branch"
+    git rebase master
+  fi
+}
+
+main "$@"

@@ -1,0 +1,39 @@
+#!/bin/bash
+
+main() {
+  local last_revision=$(git rev-parse HEAD)
+
+  while git-is-dirty; do
+    git add --patch
+    if [ $? -ne 0 ]; then
+      local last_exit_status=$?
+      break
+    fi
+    commit=$(select_commit ${last_revision}...master)
+    if [ $? -ne 0 ]; then
+      return $?
+    fi
+    git commit --fixup $commit "$@" || break
+  done
+
+  local current_revision=$(git rev-parse HEAD)
+  if [ "$last_revision" == "$current_revision" ]; then
+    return $last_exit_status
+  fi
+
+  read -p "Squash branch? " choice
+  case "$choice" in
+    y|Y ) squash ;;
+    * ) ;;
+  esac
+}
+
+select_commit() {
+  git log --format='%Cblue%h%Creset %s' "$@" | select-line | awk '{ print $1 }'
+}
+
+squash() {
+  git rebase --autosquash -i master
+}
+
+git-branch-guard --fail && main "$@"

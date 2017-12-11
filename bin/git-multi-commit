@@ -1,0 +1,21 @@
+#!/bin/bash
+
+main() {
+  local last_revision=$(git rev-parse HEAD)
+
+  while [ git-is-dirty ]; do
+    git commit --patch "$@"
+    if [ $? -ne 0 ]; then
+      local last_exit_status=$?
+      break
+    fi
+  done
+
+  local current_revision=$(git rev-parse HEAD)
+  if [ "$last_revision" == "$current_revision" ]; then
+    return $last_exit_status
+  fi
+}
+
+git-branch-guard --branch master --confirm && main "$@"
+

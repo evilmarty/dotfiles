@@ -1,0 +1,27 @@
+#!/bin/bash
+
+PULL_REQUEST_TEMPLATE="\n# Please enter the message for your pull request. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n# On branch %s"
+
+abort() {
+  >&2 echo "Aborting pull request"
+  exit 1
+}
+
+branch=$(git rev-parse --abbrev-ref HEAD);
+if [ "$branch" == "master" ]; then
+  read -p "Branch name: " branch
+  git checkout -b $branch
+fi
+
+git-multi-commit || abort
+git push origin $branch || abort
+
+pr_file=$(mktemp /tmp/GIT_PULL_REQUEST_MESSAGE.XXXXXX);
+git log HEAD...master --format="%s%n" > $pr_file
+
+template_file=$(git ls-files .github/PULL_REQUEST_TEMPLATE.md)
+if [ -f "$template_file" ]; then
+  cat "$template_file" >> $pr_file
+fi
+
+hub pull-request
