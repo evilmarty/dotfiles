@@ -64,11 +64,11 @@ case $TERM in
 	;;
 esac
 
-function prompt_command() {
+function prompt_command {
 	PS1="${TITLEBAR}${orange}${reset_color}${green}\w${bold_blue}\$(scm_prompt_info)${normal} "
 }
 
-function command_exists () {
+function command_exists {
   type "$1" &> /dev/null ;
 }
 
@@ -266,6 +266,7 @@ function git_prompt_vars {
   SCM_PREFIX=${GIT_THEME_PROMPT_PREFIX:-$SCM_THEME_PROMPT_PREFIX}
   SCM_SUFFIX=${GIT_THEME_PROMPT_SUFFIX:-$SCM_THEME_PROMPT_SUFFIX}
 }
+
 function rvm_version_prompt {
   if which rvm &> /dev/null; then
     rvm=$(rvm-prompt) || return
@@ -274,6 +275,7 @@ function rvm_version_prompt {
     fi
   fi
 }
+
 function rbenv_version_prompt {
   if which rbenv &> /dev/null; then
     rbenv=$(rbenv version-name) || return
@@ -283,11 +285,13 @@ function rbenv_version_prompt {
     fi
   fi
 }
+
 function rbfu_version_prompt {
   if [[ $RBFU_RUBY_VERSION ]]; then
     echo -e "${RBFU_THEME_PROMPT_PREFIX}${RBFU_RUBY_VERSION}${RBFU_THEME_PROMPT_SUFFIX}"
   fi
 }
+
 function chruby_version_prompt {
   if declare -f -F chruby &> /dev/null; then
     if declare -f -F chruby_auto &> /dev/null; then
@@ -300,27 +304,33 @@ function chruby_version_prompt {
     echo -e "${CHRUBY_THEME_PROMPT_PREFIX}${ruby_version}${CHRUBY_THEME_PROMPT_SUFFIX}"
   fi
 }
+
 function ruby_version_prompt {
   echo -e "$(rbfu_version_prompt)$(rbenv_version_prompt)$(rvm_version_prompt)$(chruby_version_prompt)"
 }
+
 function virtualenv_prompt {
   if [[ -n "$VIRTUAL_ENV" ]]; then
     virtualenv=`basename "$VIRTUAL_ENV"`
     echo -e "$VIRTUALENV_THEME_PROMPT_PREFIX$virtualenv$VIRTUALENV_THEME_PROMPT_SUFFIX"
   fi
 }
+
 function condaenv_prompt {
   if [[ $CONDA_DEFAULT_ENV ]]; then
     echo -e "${CONDAENV_THEME_PROMPT_PREFIX}${CONDA_DEFAULT_ENV}${CONDAENV_THEME_PROMPT_SUFFIX}"
   fi
 }
+
 function py_interp_prompt {
   py_version=$(python --version 2>&1 | awk '{print "py-"$2;}') || return
   echo -e "${PYTHON_THEME_PROMPT_PREFIX}${py_version}${PYTHON_THEME_PROMPT_SUFFIX}"
 }
+
 function python_version_prompt {
   echo -e "$(virtualenv_prompt)$(condaenv_prompt)$(py_interp_prompt)"
 }
+
 function git_user_info {
   # support two or more initials, set by 'git pair' plugin
   SCM_CURRENT_USER=$(git config user.initials | sed 's% %+%')
