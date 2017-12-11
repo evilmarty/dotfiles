@@ -94,7 +94,7 @@ case $TERM in
 esac
 
 function prompt_command {
-	PS1="${TITLEBAR}${orange}${reset_color}${green}\w${bold_blue}\$(scm_prompt_info)${normal} "
+  PS1="${TITLEBAR}${orange}${reset_color}${green}\w${bold_blue}\$(scm_prompt_info)$(jobs_prompt)${normal} "
 }
 
 function command_exists {
@@ -393,6 +393,32 @@ function clock_prompt {
 function user_host_prompt {
   if [[ "${THEME_SHOW_USER_HOST}" = "true" ]]; then
       echo -e "${USER_HOST_THEME_PROMPT_PREFIX}\u@\h${USER_HOST_THEME_PROMPT_SUFFIX}"
+  fi
+}
+
+function jobs_prompt {
+  JOBS_COLOR=${THEME_JOBS_COLOR:-"$normal"}
+  SHOW_JOBS=${THEME_SHOW_JOBS:-"true"}
+  if [[ "${SHOW_JOBS}" = "true" ]]; then
+    JOBS_NUMBER=$(jobs | wc -l | tr -d '[:space:]')
+
+    case "$JOBS_NUMBER" in
+      0) JOBS_STRING=$JOBS_THEME_CHAR_ZERO;;
+      1) JOBS_STRING=$JOBS_THEME_CHAR_ONE;;
+      2) JOBS_STRING=$JOBS_THEME_CHAR_TWO;;
+      3) JOBS_STRING=$JOBS_THEME_CHAR_THREE;;
+      4) JOBS_STRING=$JOBS_THEME_CHAR_FOUR;;
+      5) JOBS_STRING=$JOBS_THEME_CHAR_FIVE;;
+      6) JOBS_STRING=$JOBS_THEME_CHAR_SIX;;
+      7) JOBS_STRING=$JOBS_THEME_CHAR_SEVEN;;
+      8) JOBS_STRING=$JOBS_THEME_CHAR_EIGHT;;
+      9) JOBS_STRING=$JOBS_THEME_CHAR_NINE;;
+      *) JOBS_STRING=$JOBS_THEME_CHAR_MORE;;
+    esac
+
+    if [ -n "${JOBS_STRING}" ]; then
+      echo -e "${JOBS_COLOR}${JOBS_THEME_PROMPT_PREFIX}${JOBS_STRING}${JOBS_THEME_PROMPT_SUFFIX}"
+    fi
   fi
 }
 
