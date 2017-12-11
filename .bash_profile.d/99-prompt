@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Shamelessly copied from https://github.com/Bash-it/bash-it
+
 # prompt themeing
 black="\[\e[0;30m\]"
 red="\[\e[0;31m\]"
@@ -21,6 +23,33 @@ bold_white="\[\e[37;1m\]"
 bold_orange="\[\e[91;1m\]"
 normal="\[\e[0m\]"
 reset_color="\[\e[39m\]"
+
+# clock theming
+CLOCK_CHAR_THEME_PROMPT_PREFIX=''
+CLOCK_CHAR_THEME_PROMPT_SUFFIX=''
+CLOCK_THEME_PROMPT_PREFIX=''
+CLOCK_THEME_PROMPT_SUFFIX=''
+
+# user host theming
+THEME_SHOW_USER_HOST=${THEME_SHOW_USER_HOST:=false}
+USER_HOST_THEME_PROMPT_PREFIX=''
+USER_HOST_THEME_PROMPT_SUFFIX=''
+
+# jobs theming
+THEME_JOBS_COLOR="$purple"
+JOBS_THEME_PROMPT_PREFIX=' '
+JOBS_THEME_PROMPT_SUFFIX=' '
+JOBS_THEME_CHAR_ZERO=''
+JOBS_THEME_CHAR_ONE='①'
+JOBS_THEME_CHAR_TWO='②'
+JOBS_THEME_CHAR_THREE='③'
+JOBS_THEME_CHAR_FOUR='④'
+JOBS_THEME_CHAR_FIVE='⑤'
+JOBS_THEME_CHAR_SIX='⑥'
+JOBS_THEME_CHAR_SEVEN='⑦'
+JOBS_THEME_CHAR_EIGHT='⑧'
+JOBS_THEME_CHAR_NINE='⑨'
+JOBS_THEME_CHAR_MORE='Ⓜ'
 
 # scm themeing
 SCM_THEME_PROMPT_DIRTY=' ✗'
