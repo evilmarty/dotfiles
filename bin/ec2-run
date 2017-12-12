@@ -1,0 +1,201 @@
+#!/bin/bash
+
+main() {
+  local ssh_args=()
+
+  while [[ $# -gt 0 ]]; do
+    case $1 in
+      -u|--user )
+        EC2_USER=$2
+        shift
+        ;;
+      -i|--image-id )
+        IMAGE_ID=$2
+        shift
+        ;;
+      -t|--instance-type )
+        EC2_INSTANCE_TYPE=$2
+        shift
+        ;;
+      -k|--key-name )
+        EC2_KEY_NAME=$2
+        shift
+        ;;
+      -s|--subnet-id )
+        EC2_SUBNET_ID=$2
+        shift
+        ;;
+      --security-group-ids )
+        EC2_SECURITY_GROUP_IDS=$2
+        shift
+        ;;
+      --private )
+        EC2_PUBLIC_IP_ADDRESS=no
+        ;;
+      -p|--port )
+        SSH_PORT=$2
+        shift
+        ;;
+      --retries )
+        RETRIES=$2
+        shift
+        ;;
+      --retry-delay )
+        RETRY_DELAY=$2
+        shift
+        ;;
+      * )
+        ssh_args+=("$1")
+    esac
+    shift
+  done
+
+  assert_valid_options
+
+  trap cleanup EXIT
+
+  create_temporary_key_pair_if_non_specified
+  run_new_ec2_instance
+  connect_to_ssh ${args[@]}
+}
+
+assert_valid_options() {
+  if [ -z "$IMAGE_ID" ]; then
+    >&2 cat <<EOT
+--image-id is required.
+
+Usage: $0 --image-id <image id> [--user <user>] [--instance-type <type>] [--key-name <key name>] [--subnet-id <subnet id>] [--security-group-ids <ids>[,<id>,...]] [--private] [--port <port>]
+EOT
+    exit 1
+  fi
+}
+
+run_new_ec2_instance() {
+  local name="${USER}"
+
+  if [ -n "$EC2_HOST" ]; then
+    return 0
+  fi
+
+  local args=(--image-id "$IMAGE_ID" --key-name "$EC2_KEY_NAME" --instance-initiated-shutdown-behavior terminate --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${name}}]")
+
+  if [ -n "$EC2_INSTANCE_TYPE" ]; then
+    args+=(--instance-type $EC2_INSTANCE_TYPE)
+  fi
+
+  if [ -n "$EC2_SUBNET_ID" ]; then
+    args+=(--subnet-id $EC2_SUBNET_ID)
+  fi
+
+  if [ -n "$EC2_SUBNET_ID" ]; then
+    args+=(--subnet-id $EC2_SUBNET_ID)
+  fi
+
+  if [ -n "$EC2_SECURITY_GROUP_IDS" ]; then
+    args+=(--security-group-ids $EC2_SECURITY_GROUP_IDS)
+  fi
+
+  if [ "${EC2_PUBLIC_IP_ADDRESS:-yes}" == "yes" ]; then
+    args+=(--associate-public-ip-address)
+  else
+    args+=(--no-associate-public-ip-address)
+  fi
+
+  notice "Launching new EC2 instance..."
+  EC2_INSTANCE_ID=$(aws ec2 run-instances ${args[@]} --query 'Instances[].InstanceId' --output text)
+  EC2_HOST=$(aws ec2 describe-instances --instance-id $EC2_INSTANCE_ID --query 'Reservations[].Instances[].PublicIpAddress' --output text)
+
+  while [ $(get_ec2_instance_state) != "pending" ]; do
+    notice "."
+    sleep 1
+  done
+
+  success "Done\n"
+}
+
+terminate_ec2_instance() {
+  if [ -n "$EC2_INSTANCE_ID" ]; then
+    notice "Terminating ${EC2_INSTANCE_ID}..."
+    aws ec2 terminate-instances --instance-id $EC2_INSTANCE_ID > /dev/null
+
+    while [ $(get_ec2_instance_state) != "terminated" ]; do
+      notice "."
+      sleep 1
+    done
+
+    unset EC2_INSTANCE_ID
+    success "Done\n"
+  fi
+}
+
+get_ec2_instance_state() {
+  aws ec2 describe-instances --instance-id $EC2_INSTANCE_ID --query 'Reservations[].Instances[].State.Name' --output text
+}
+
+connect_to_ssh() {
+  local attempt=0
+  local retries=${RETRIES:-5}
+  local retry_delay=${RETRY_DELAY:-30}
+  local args=(-l "${EC2_USER:-ec2-user}" -o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null")
+
+  if [ -n "$TEMP_SSH_PRIVATE_KEY" ]; then
+    args+=(-i "$TEMP_SSH_PRIVATE_KEY" -o "AddKeysToAgent no" -o "IdentitiesOnly yes")
+  fi
+
+  if [ -n "$SSH_PORT" ]; then
+    args+=(-p "$SSH_PORT")
+  fi
+
+  notice "Connecting to ${EC2_HOST}...\n"
+  while (( $attempt <= $retries )); do
+    ssh "${args[@]}" "${EC2_HOST}"
+    [ $? -eq 0 ] && return 0
+    sleep $retry_delay
+    ((attempt+=1))
+  done
+
+  fail "Timeout\n"
+
+  return 1
+}
+
+create_temporary_key_pair_if_non_specified() {
+  if [ -n "$EC2_KEY_NAME" ]; then
+    return 0
+  fi
+
+  TEMP_SSH_PRIVATE_KEY=$(mktemp -t ${USER}-XXXXXX)
+  EC2_KEY_NAME=$(basename $TEMP_SSH_PRIVATE_KEY)
+
+  notice "Creating temporary key... "
+  aws ec2 create-key-pair --key-name "$EC2_KEY_NAME" --query 'KeyMaterial' --output text > $TEMP_SSH_PRIVATE_KEY
+  success "Done\n"
+}
+
+delete_temporary_key_pair_if_exists() {
+  if [ -f "$TEMP_SSH_PRIVATE_KEY" ]; then
+    notice "Deleting temporary key... "
+    aws ec2 delete-key-pair --key-name "$EC2_KEY_NAME"
+    unset TEMP_SSH_PRIVATE_KEY
+    success "Done\n"
+  fi
+}
+
+cleanup() {
+  terminate_ec2_instance
+  delete_temporary_key_pair_if_exists
+}
+
+notice() {
+  >&2 printf "\033[0;34m$@\033[0m"
+}
+
+success() {
+  >&2 printf "\033[0;32m$@\033[0m"
+}
+
+fail() {
+  >&2 printf "\033[0;31m$@\033[0m"
+}
+
+main "$@"
