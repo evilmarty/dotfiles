@@ -3,7 +3,6 @@ export PATH="~/bin:/usr/local/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
-alias ls='ls --color=auto'
 alias ll='ls -GFlash'
 alias tree='tree -C'
 alias agg="ag -g"
