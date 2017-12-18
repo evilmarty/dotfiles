@@ -17,6 +17,10 @@ main() {
         EC2_INSTANCE_TYPE=$2
         shift
         ;;
+      -I|--iam-instance-profile )
+        EC2_IAM_INSTANCE_PROFILE=$2
+        shift
+        ;;
       -k|--key-name )
         EC2_KEY_NAME=$2
         shift
@@ -44,6 +48,10 @@ main() {
         RETRY_DELAY=$2
         shift
         ;;
+      -v* )
+        VERBOSE=true
+        ssh_args+=("$1")
+        ;;
       * )
         ssh_args+=("$1")
     esac
@@ -53,6 +61,10 @@ main() {
   assert_valid_options
 
   trap cleanup EXIT
+
+  if [ -n "$VERBOSE" ]; then
+    set -x
+  fi
 
   create_temporary_key_pair_if_non_specified
   run_new_ec2_instance
@@ -64,7 +76,7 @@ assert_valid_options() {
     >&2 cat <<EOT
 --image-id is required.
 
-Usage: $0 --image-id <image id> [--user <user>] [--instance-type <type>] [--key-name <key name>] [--subnet-id <subnet id>] [--security-group-ids <ids>[,<id>,...]] [--private] [--port <port>]
+Usage: $0 --image-id <image id> [--user <user>] [--instance-type <type>] [--key-name <key name>] [--subnet-id <subnet id>] [--security-group-ids <ids>[,<id>,...]] [--private] [--port <port>] [--iam-instance-profile <instance profile name>]
 EOT
     exit 1
   fi
@@ -81,6 +93,10 @@ run_new_ec2_instance() {
 
   if [ -n "$EC2_INSTANCE_TYPE" ]; then
     args+=(--instance-type $EC2_INSTANCE_TYPE)
+  fi
+
+  if [ -n "$EC2_IAM_INSTANCE_PROFILE" ]; then
+    args+=(--iam-instance-profile "Name=${EC2_IAM_INSTANCE_PROFILE}")
   fi
 
   if [ -n "$EC2_SUBNET_ID" ]; then
