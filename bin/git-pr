@@ -13,7 +13,7 @@ if [ "$branch" == "master" ]; then
   git checkout -b $branch
 fi
 
-git-multi-commit || abort
+git-multi-commit "$@" || abort
 git push origin $branch || abort
 
 pr_file=$(mktemp /tmp/GIT_PULL_REQUEST_MESSAGE.XXXXXX);
