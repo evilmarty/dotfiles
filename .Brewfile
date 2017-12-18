@@ -2,6 +2,7 @@ tap "caskroom/fonts"
 tap "caskroom/cask"
 
 brew "coreutils"
+brew "gnu-sed"
 brew "bash"                      # Use latest bash
 brew "ag"                        # the_silver_searcher
 brew "git"
