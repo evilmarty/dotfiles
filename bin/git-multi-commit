@@ -2,11 +2,12 @@
 
 main() {
   local last_revision=$(git rev-parse HEAD)
+  local last_exit_status=0
 
   while [ git-is-dirty ]; do
     git commit --patch "$@"
-    if [ $? -ne 0 ]; then
-      local last_exit_status=$?
+    local last_exit_status=$?
+    if [ $last_exit_status -ne 0 ]; then
       break
     fi
   done
