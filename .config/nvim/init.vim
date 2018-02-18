@@ -22,6 +22,7 @@ if dein#load_state(expand('~/.nvim'))
   call dein#add('nanotech/jellybeans.vim')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tpope/vim-commentary')
+  call dein#add('elmcast/elm-vim')
 
   call dein#end()
   call dein#save_state()
