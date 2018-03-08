@@ -58,7 +58,9 @@ set spelllang=en_au " Australian English
 " Whitespace
 set list                      " Show invisibles by default
 set listchars=tab:▸\ ,trail:· " Show tabs, trailing whitespace and end of lines
-set nowrap                    " Do not wrap lines
+" set nowrap                    " Do not wrap lines
+set formatoptions=l
+set lbr
 set expandtab                 " Use spaces instead of tabs
 set smarttab                  " Be smart when using tabs ;-)
 set softtabstop=2             " 1 tab is 2 spaces
@@ -81,7 +83,9 @@ set undoreload=10000        " Number of lines to save
 " Disable mouse input
 set mouse=
 
-set bufhidden=hide
+" Misc
+set bufhidden=hide         " Hide buffer when not in window
+set browsedir=current      " Open the browser at the current working dir
 
 " Bindings
 nnoremap <LEADER>n :n .<CR>|                           " Open the filer manager at the current working directory
