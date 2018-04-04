@@ -68,6 +68,9 @@ set shiftwidth=2
 set tabstop=2
 set foldmethod=indent         " Fold based on indentation.
 set foldlevelstart=99         " Expand all folds by default.
+" Open splits at right side (and below)
+set splitright
+set splitbelow
 
 " Disable backup. No swap files.
 set nobackup
@@ -93,10 +96,16 @@ nmap <LEADER>l :set list!<CR>|                         " Toggle list characters 
 map <LEADER>S :set spell!<CR>|                         " Toggle spell
 map <LEADER><left> :bprev<CR>|                         " Previous buffer
 map <LEADER><right> :bnext<CR>|                        " Next buffer
+map <C-L> :noh<CR>|                                    " Clean up search
 nnoremap <LEADER>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
 nnoremap <LEADER>s :%s/\<<C-r><C-w>\>/|                " Search for word under cursor and substitute
 nnoremap <LEADER>w /<C-r><C-w><CR>|                    " Search for word under cursor
-nnoremap <LEADER><ESC> :nohlsearch<CR>|                " Clear search
+nnoremap <F12> :source $MYVIMRC<CR>|                   " F12 reloads the ~/.vimrc file
+
+" A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
+" This lets you use w!! to do that after you opened the file already:
+cmap w!! w !sudo tee % >/dev/null
+
 
 " netrw config
 let g:netrw_banner = 0
