@@ -92,14 +92,16 @@ set browsedir=current      " Open the browser at the current working dir
 
 " Bindings
 nnoremap <LEADER>n :n .<CR>|                           " Open the filer manager at the current working directory
-nmap <LEADER>l :set list!<CR>|                         " Toggle list characters (Invisibles)
-map <LEADER>S :set spell!<CR>|                         " Toggle spell
-map <LEADER><left> :bprev<CR>|                         " Previous buffer
-map <LEADER><right> :bnext<CR>|                        " Next buffer
-map <C-L> :noh<CR>|                                    " Clean up search
+nnoremap <LEADER>l :set list!<CR>|                     " Toggle list characters (Invisibles)
+nnoremap <LEADER>S :set spell!<CR>|                    " Toggle spell
+nnoremap <silent> <LEADER><left> :bprev<CR>|           " Previous buffer
+nnoremap <silent> <LEADER><right> :bnext<CR>|          " Next buffer
+nnoremap ,<space> :nohlsearch<CR>|                     " Clean up search
 nnoremap <LEADER>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
 nnoremap <LEADER>s :%s/\<<C-r><C-w>\>/|                " Search for word under cursor and substitute
 nnoremap <LEADER>w /<C-r><C-w><CR>|                    " Search for word under cursor
+nnoremap <silent> <C-L> :ls<CR>|                       " List buffers
+nnoremap <silent> <LEADER>w :bd<CR>|                   " Close current buffer
 nnoremap <F12> :source $MYVIMRC<CR>|                   " F12 reloads the ~/.vimrc file
 
 " A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
