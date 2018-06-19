@@ -5,13 +5,13 @@ endif
 filetype plugin indent on
 
 " Required:
-set runtimepath^=~/.nvim/repos/github.com/Shougo/dein.vim
+set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state(expand('~/.nvim'))
-  call dein#begin(expand('~/.nvim'))
+if dein#load_state(expand('~/.cache/dein'))
+  call dein#begin(expand('~/.cache/dein'))
 
-  call dein#add('Shougo/dein.vim')
+  call dein#add('~/.cache/dein')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('ctrlpvim/ctrlp.vim')
@@ -28,6 +28,7 @@ if dein#load_state(expand('~/.nvim'))
   call dein#save_state()
 endif
 
+let g:deoplete#enable_at_startup = 1
 
 " Ctrl-P: Exclude .git and files in .gitingore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']

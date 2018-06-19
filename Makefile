@@ -2,6 +2,7 @@ BUNDLE_PATH=$(HOME)/.vim/bundle
 VUNDLE_PATH=$(BUNDLE_PATH)/Vundle.vim
 VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
 CONFIG_PATH=$(HOME)/.config
+CACHE_PATH=$(HOME)/.cache
 HOMEBREW=$(shell which brew)
 
 install: homebrew vim nvim iterm
@@ -19,6 +20,8 @@ vim: FORCE
 	vim +PluginInstall +qall
 
 nvim: FORCE
+	mkdir -p $(CACHE_PATH)/dein
+	git clone https://github.com/Shougo/dein.vim $(CACHE_PATH)/dein
 	pip3 install --upgrade neovim
 	nvim -c 'call dein#install()'
 
