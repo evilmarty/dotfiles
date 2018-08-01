@@ -36,6 +36,9 @@ main() {
       --private )
         EC2_PUBLIC_IP_ADDRESS=no
         ;;
+      --user-data )
+        EC2_USER_DATA=$2
+        ;;
       -p|--port )
         SSH_PORT=$2
         shift
@@ -76,7 +79,7 @@ assert_valid_options() {
     >&2 cat <<EOT
 --image-id is required.
 
-Usage: $0 --image-id <image id> [--user <user>] [--instance-type <type>] [--key-name <key name>] [--subnet-id <subnet id>] [--security-group-ids <ids>[,<id>,...]] [--private] [--port <port>] [--iam-instance-profile <instance profile name>]
+Usage: $0 --image-id <image id> [--user <user>] [--user-data <string>] [--instance-type <type>] [--key-name <key name>] [--subnet-id <subnet id>] [--security-group-ids <ids>[,<id>,...]] [--private] [--port <port>] [--iam-instance-profile <instance profile name>]
 EOT
     exit 1
   fi
@@ -91,8 +94,12 @@ run_new_ec2_instance() {
 
   local args=(--image-id "$IMAGE_ID" --key-name "$EC2_KEY_NAME" --instance-initiated-shutdown-behavior terminate --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=${name}}]")
 
+  if [ -n "$EC2_USER_DATA" ]; then
+    args+=(--user-data "$EC2_USER_DATA")
+  fi
+
   if [ -n "$EC2_INSTANCE_TYPE" ]; then
-    args+=(--instance-type $EC2_INSTANCE_TYPE)
+    args+=(--instance-type "$EC2_INSTANCE_TYPE")
   fi
 
   if [ -n "$EC2_IAM_INSTANCE_PROFILE" ]; then
@@ -100,15 +107,11 @@ run_new_ec2_instance() {
   fi
 
   if [ -n "$EC2_SUBNET_ID" ]; then
-    args+=(--subnet-id $EC2_SUBNET_ID)
-  fi
-
-  if [ -n "$EC2_SUBNET_ID" ]; then
-    args+=(--subnet-id $EC2_SUBNET_ID)
+    args+=(--subnet-id "$EC2_SUBNET_ID")
   fi
 
   if [ -n "$EC2_SECURITY_GROUP_IDS" ]; then
-    args+=(--security-group-ids $EC2_SECURITY_GROUP_IDS)
+    args+=(--security-group-ids "$EC2_SECURITY_GROUP_IDS")
   fi
 
   if [ "${EC2_PUBLIC_IP_ADDRESS:-yes}" == "yes" ]; then
