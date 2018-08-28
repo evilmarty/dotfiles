@@ -69,6 +69,7 @@ set shiftwidth=2
 set tabstop=2
 set foldmethod=indent         " Fold based on indentation.
 set foldlevelstart=99         " Expand all folds by default.
+set noshowmode
 " Open splits at right side (and below)
 set splitright
 set splitbelow
