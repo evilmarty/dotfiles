@@ -122,9 +122,6 @@ let g:netrw_winsize = 25
 "   autocmd VimEnter * if expand("%") == "" | :Vexplore | endif
 " augroup END
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-
 " Terraform
 let g:terraform_fmt_on_save = 1
 " Fix up comments in Terraform files
