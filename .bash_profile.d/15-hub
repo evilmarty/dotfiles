@@ -23,3 +23,5 @@ EOF
   # Ensure cached commands are cleared
   __git_all_commands=""
 fi
+eval `hub alias -s bash`
+
