@@ -3,9 +3,9 @@ export PATH="~/bin:/usr/local/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
+alias cat='bat'
 alias ll='ls -GFlash --color'
 alias tree='tree -C'
-alias agg="ag -g"
 alias tunnel="ssh -D 1080 -N -T"
 alias sssh="ssh -o 'UserKnownHostsFile /dev/null' -o 'StrictHostKeyChecking no'"
 alias prod="aws-vault exec production --"

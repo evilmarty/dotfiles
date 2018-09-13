@@ -11,6 +11,10 @@ brew "vim"                       # Don't use native vim
 brew "neovim/neovim/neovim"
 brew "yarn"
 brew "tmux"
+brew "bat"                       # cat with syntax highlighting
+brew "fd"                        # simpler version of find
+brew "fzf"                       # fuzzy finder for bash and (neo)vim
+brew "tldr"                      # community managed man pages
 
 cask "firefox"
 cask "thunderbird"

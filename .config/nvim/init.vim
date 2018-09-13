@@ -91,6 +91,7 @@ set mouse=
 " Misc
 set bufhidden=hide         " Hide buffer when not in window
 set browsedir=current      " Open the browser at the current working dir
+set rtp+=/usr/local/opt/fzf
 
 " Bindings
 nnoremap <LEADER>n :n .<CR>|                           " Open the filer manager at the current working directory
@@ -109,7 +110,6 @@ nnoremap <F12> :source $MYVIMRC<CR>|                   " F12 reloads the ~/.vimr
 " A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
 " This lets you use w!! to do that after you opened the file already:
 cmap w!! w !sudo tee % >/dev/null
-
 
 " netrw config
 let g:netrw_banner = 0
