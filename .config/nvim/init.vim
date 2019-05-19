@@ -24,6 +24,7 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('tpope/vim-commentary')
   call dein#add('elmcast/elm-vim')
   call dein#add('vito-c/jq.vim')
+  call dein#add('elixir-editors/vim-elixir')
 
   call dein#end()
   call dein#save_state()
