@@ -96,18 +96,22 @@ set browsedir=current      " Open the browser at the current working dir
 set rtp+=/usr/local/opt/fzf
 
 " Bindings
-nnoremap <LEADER>n :n .<CR>|                           " Open the filer manager at the current working directory
-nnoremap <LEADER>l :set list!<CR>|                     " Toggle list characters (Invisibles)
-nnoremap <LEADER>S :set spell!<CR>|                    " Toggle spell
-nnoremap <silent> <LEADER><left> :bprev<CR>|           " Previous buffer
-nnoremap <silent> <LEADER><right> :bnext<CR>|          " Next buffer
-nnoremap ,<space> :nohlsearch<CR>|                     " Clean up search
-nnoremap <LEADER>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
-nnoremap <LEADER>s :%s/\<<C-r><C-w>\>/|                " Search for word under cursor and substitute
-nnoremap <LEADER>w /<C-r><C-w><CR>|                    " Search for word under cursor
-nnoremap <silent> <C-L> :ls<CR>|                       " List buffers
-nnoremap <silent> <LEADER>w :bd<CR>|                   " Close current buffer
-nnoremap <F12> :source $MYVIMRC<CR>|                   " F12 reloads the ~/.vimrc file
+nnoremap <LEADER>n :n .<CR>                           " Open the filer manager at the current working directory
+nnoremap <LEADER>l :set list!<CR>                     " Toggle list characters (Invisibles)
+nnoremap <LEADER>S :set spell!<CR>                    " Toggle spell
+nnoremap <silent> <LEADER><left> :bprev<CR>           " Previous buffer
+nnoremap <silent> <LEADER><right> :bnext<CR>          " Next buffer
+nnoremap ,<space> :nohlsearch<CR>                     " Clean up search
+nnoremap <LEADER>e :e <C-R>=expand('%:p:h') . '/'<CR> " Edit file in same directory
+nnoremap <LEADER>s :%s/\<<C-r><C-w>\>/                " Search for word under cursor and substitute
+nnoremap <LEADER>w /<C-r><C-w><CR>                    " Search for word under cursor
+nnoremap <silent> <C-L> :ls<CR>                       " List buffers
+nnoremap <silent> <LEADER>w :bd<CR>                   " Close current buffer
+nnoremap <F12> :source $MYVIMRC<CR>                   " F12 reloads the ~/.vimrc file
+
+" Move block text
+vnoremap <silent> J :m '>+1gv=gv<CR>
+vnoremap <silent> K :m '<-2gv=gv<CR>
 
 " A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
 " This lets you use w!! to do that after you opened the file already:
