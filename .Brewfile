@@ -12,6 +12,7 @@ brew "hub"                       # Enhance git
 brew "vim"                       # Don't use native vim
 brew "neovim"
 brew "tmux"
+brew "gpg"
 brew "bat"                       # cat with syntax highlighting
 brew "fd"                        # simpler version of find
 brew "fzf"                       # fuzzy finder for bash and (neo)vim
