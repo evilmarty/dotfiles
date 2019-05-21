@@ -1,5 +1,6 @@
 tap "caskroom/fonts"
 tap "caskroom/cask"
+tap "spotify/public"
 
 brew "coreutils"
 brew "gnu-sed"
@@ -24,6 +25,7 @@ cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
 cask "veertu-desktop"            # VM manager which uses OSX's hypervisor
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
+cask "spotify"
 
 mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
