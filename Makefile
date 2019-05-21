@@ -7,8 +7,8 @@ HOMEBREW=$(shell which brew)
 
 home: FORCE
 	git ls-files | xargs -n 1 dirname | sort -u | xargs -I % -n 1 mkdir -p $(HOME)/%
-	git ls-files | xargs cp -u -t $(HOME)
-	cp -uR .git $(HOME)
+	git ls-files | xargs -n 1 -I % cp -f % $(HOME)/%
+	cp -fR .git $(HOME)
 
 install: homebrew vim nvim iterm
 
