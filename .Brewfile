@@ -23,7 +23,6 @@ cask "bittorrent"
 cask "iterm2"
 cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
-cask "veertu-desktop"            # VM manager which uses OSX's hypervisor
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
 cask "spotify"
 
