@@ -19,7 +19,6 @@ brew "tldr"                      # community managed man pages
 cask "firefox"
 cask "thunderbird"
 cask "vlc"
-cask "bittorrent"
 cask "iterm2"
 cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
