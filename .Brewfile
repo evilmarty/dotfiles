@@ -26,6 +26,7 @@ cask "qlmarkdown"                # Quickview markdown files
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
 cask "spotify"
 cask "keybase"
+cask "signal"
 
 mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
