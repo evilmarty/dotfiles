@@ -16,6 +16,8 @@ __Note__ use at your own risk.
 ## Installation
 
 ```
-git clone git://github.com/evilmarty/dotfiles ~
-make
+git clone git://github.com/evilmarty/dotfiles
+cd dotfiles
+make home && cd # copies files to home directory (optional)
+make install
 ```
