@@ -26,7 +26,7 @@ vim: FORCE
 
 nvim: FORCE
 	mkdir -p $(CACHE_PATH)/dein
-	git clone https://github.com/Shougo/dein.vim $(CACHE_PATH)/dein
+	curl -s https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh -s $(CACHE_PATH)/dein
 	pip3 install --upgrade neovim
 	nvim -c 'call dein#install()'
 
