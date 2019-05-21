@@ -13,8 +13,8 @@ home: FORCE
 install: homebrew vim nvim iterm
 
 homebrew: $(HOMEBREW) .Brewfile
-ifndef HOMEBREW
-	/usr/bin/ruby -e "$(shell curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+ifndef $(HOMEBREW)
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install | /usr/bin/ruby
 endif
 	brew tap-info homebrew/bundle 2> /dev/null || brew tap homebrew/bundle
 	brew bundle --global
