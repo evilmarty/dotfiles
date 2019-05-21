@@ -8,7 +8,7 @@ brew "ag"                        # the_silver_searcher
 brew "git"
 brew "hub"                       # Enhance git
 brew "vim"                       # Don't use native vim
-brew "neovim/neovim/neovim"
+brew "neovim"
 brew "yarn"
 brew "tmux"
 brew "bat"                       # cat with syntax highlighting
