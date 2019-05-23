@@ -29,6 +29,7 @@ cask "spotify"
 cask "keybase"
 cask "signal"
 cask "docker"
+cask "flux"                      # A better "Night Shift™️"
 
 mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
