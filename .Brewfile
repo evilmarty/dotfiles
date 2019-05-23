@@ -18,16 +18,16 @@ brew "fd"                        # simpler version of find
 brew "fzf"                       # fuzzy finder for bash and (neo)vim
 brew "tldr"                      # community managed man pages
 
-cask "firefox"
+cask "firefox"                   # The ONE web browser to rule them all
 cask "thunderbird"
-cask "vlc"
-cask "iterm2"
+cask "vlc"                       # The ONE media player to rule them all
+cask "iterm2"                    # Replacement terminal app
 cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
-cask "spotify"
+cask "spotify"                   # Current music player service
 cask "keybase"
-cask "signal"
+cask "signal"                    # e2e multi-device/platform chat
 cask "docker"
 cask "flux"                      # A better "Night Shift™️"
 
