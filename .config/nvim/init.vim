@@ -18,7 +18,6 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('fatih/vim-go')
   call dein#add('hashivim/vim-terraform')
   call dein#add('itchyny/lightline.vim')
-  call dein#add('mileszs/ack.vim')
   call dein#add('nanotech/jellybeans.vim')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tpope/vim-commentary')
@@ -93,6 +92,7 @@ set mouse=
 " Misc
 set bufhidden=hide         " Hide buffer when not in window
 set browsedir=current      " Open the browser at the current working dir
+set grepprg=rg\ --vimgrep  " Use ripgrep as grep
 set rtp+=/usr/local/opt/fzf
 
 " Bindings
@@ -132,6 +132,3 @@ let g:netrw_winsize = 25
 let g:terraform_fmt_on_save = 1
 " Fix up comments in Terraform files
 autocmd FileType terraform setlocal commentstring=#%s
-
-" Use the_silver_searcher
-let g:ackprg = 'ag --vimgrep'
