@@ -12,9 +12,9 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#begin(expand('~/.cache/dein'))
 
   call dein#add('~/.cache/dein')
+  call dein#add('/usr/local/opt/fzf/plugin/fzf.vim')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('airblade/vim-gitgutter')
-  call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('fatih/vim-go')
   call dein#add('hashivim/vim-terraform')
   call dein#add('itchyny/lightline.vim')
@@ -106,6 +106,7 @@ nnoremap <LEADER>s :vimgrep <C-r><C-w> *<CR>         | " Search for word under c
 nnoremap <silent> <C-L> :ls<CR>                      | " List buffers
 nnoremap <silent> <LEADER>w :bd<CR>                  | " Close current buffer
 nnoremap <F12> :source $MYVIMRC<CR>                  | " F12 reloads the ~/.vimrc file
+nnoremap <silent> <C-P> :FZF<CR>                     | " Open fzf
 
 " Move block text
 vnoremap <silent> J :m '>+1gv=gv<CR>
