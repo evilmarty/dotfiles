@@ -21,7 +21,6 @@ if dein#load_state(expand('~/.cache/dein'))
   call dein#add('nanotech/jellybeans.vim')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tpope/vim-commentary')
-  call dein#add('elmcast/elm-vim')
   call dein#add('vito-c/jq.vim')
   call dein#add('elixir-editors/vim-elixir')
 
