@@ -21,19 +21,33 @@ main() {
     return $last_exit_status
   fi
 
-  read -p "Squash branch? " choice
+  confirm_squash && confirm_force_push || confirm_push || true
+}
+
+confirm_squash() {
+  confirm "Squash branch? " && git rebase --autosquash -i master
+}
+
+confirm_push() {
+  confirm "Push branch? " && git push
+}
+
+confirm_force_push() {
+  confirm "Force push branch? " && git push --force
+}
+
+confirm() {
+  read -p "$1" choice
   case "$choice" in
-    y|Y ) squash ;;
-    * ) ;;
+    y|Y|yes|t|T|true|1 )
+      return 0;;
+    * )
+      return 1;;
   esac
 }
 
 select_commit() {
-  git log --format='%Cblue%h%Creset %s' "$@" | select-line | awk '{ print $1 }'
-}
-
-squash() {
-  git rebase --autosquash -i master
+  git log --format='%Cblue%h%Creset %s' "$@" | fzf --header='Select commit to fix up' | awk '{ print $1 }'
 }
 
 git-branch-guard --fail && main "$@"
