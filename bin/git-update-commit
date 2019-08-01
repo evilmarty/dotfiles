@@ -25,25 +25,15 @@ main() {
 }
 
 confirm_squash() {
-  confirm "Squash branch? " && git rebase --autosquash -i master
+  confirm "Squash branch?" && git rebase --autosquash -i master
 }
 
 confirm_push() {
-  confirm "Push branch? " && git push
+  confirm "Push branch?" && git push
 }
 
 confirm_force_push() {
-  confirm "Force push branch? " && git push --force
-}
-
-confirm() {
-  read -p "$1" choice
-  case "$choice" in
-    y|Y|yes|t|T|true|1 )
-      return 0;;
-    * )
-      return 1;;
-  esac
+  confirm "Force push branch?" && git push --force
 }
 
 select_commit() {

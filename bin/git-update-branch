@@ -22,4 +22,8 @@ update() {
   fi
 }
 
+confirm_force_push() {
+  confirm "Force push branch? " && git push origin --force
+}
+
 main "$@"
