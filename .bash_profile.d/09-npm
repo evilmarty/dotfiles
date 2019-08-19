@@ -1,2 +1,0 @@
-# Add NPM to path if available
-export PATH="$PATH:./node_modules/.bin:/usr/local/share/npm/bin"

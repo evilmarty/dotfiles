@@ -1,3 +1,0 @@
-alias docker-clean='docker images --quiet --filter "dangling=true" | xargs docker rmi'
-alias dc=docker-compose
-
