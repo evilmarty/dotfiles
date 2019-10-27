@@ -69,9 +69,9 @@ main() {
     set -x
   fi
 
-  create_temporary_key_pair_if_non_specified
-  run_new_ec2_instance
-  connect_to_ssh ${args[@]}
+  create_temporary_key_pair_if_non_specified && \
+    run_new_ec2_instance && \
+    connect_to_ssh ${args[@]}
 }
 
 assert_valid_options() {
@@ -122,6 +122,11 @@ run_new_ec2_instance() {
 
   notice "Launching new EC2 instance..."
   EC2_INSTANCE_ID=$(aws ec2 run-instances ${args[@]} --query 'Instances[].InstanceId' --output text)
+  if [ $? -ne 0 ]; then
+    fail "Error\n"
+    return 1
+  fi
+
   EC2_HOST=$(aws ec2 describe-instances --instance-id $EC2_INSTANCE_ID --query 'Reservations[].Instances[].PublicIpAddress' --output text)
 
   while [ $(get_ec2_instance_state) != "pending" ]; do
@@ -188,7 +193,12 @@ create_temporary_key_pair_if_non_specified() {
 
   notice "Creating temporary key... "
   aws ec2 create-key-pair --key-name "$EC2_KEY_NAME" --query 'KeyMaterial' --output text > $TEMP_SSH_PRIVATE_KEY
-  success "Done\n"
+  if [ $? -eq 0 ]; then
+    success "Done\n"
+  else
+    fail "Error\n"
+    return 1
+  fi
 }
 
 delete_temporary_key_pair_if_exists() {
