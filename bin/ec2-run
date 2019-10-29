@@ -141,14 +141,19 @@ terminate_ec2_instance() {
   if [ -n "$EC2_INSTANCE_ID" ]; then
     notice "Terminating ${EC2_INSTANCE_ID}..."
     aws ec2 terminate-instances --instance-id $EC2_INSTANCE_ID > /dev/null
+    local exit_status=$?
 
-    while [ $(get_ec2_instance_state) != "terminated" ]; do
+    while [ $exit_status -eq 0 ]; do
+      if [ $(get_ec2_instance_state) == "terminated" ]; then
+        break
+      fi
+      local exit_status=$?
       notice "."
       sleep 1
     done
 
     unset EC2_INSTANCE_ID
-    success "Done\n"
+    [ $exit_status -eq 0 ] && success "Done\n" || fail "Error\n"
   fi
 }
 
@@ -205,8 +210,8 @@ delete_temporary_key_pair_if_exists() {
   if [ -f "$TEMP_SSH_PRIVATE_KEY" ]; then
     notice "Deleting temporary key... "
     aws ec2 delete-key-pair --key-name "$EC2_KEY_NAME"
+    [ $? -eq 0 ] && success "Done\n" || fail "Error\n"
     unset TEMP_SSH_PRIVATE_KEY
-    success "Done\n"
   fi
 }
 
