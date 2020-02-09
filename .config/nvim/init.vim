@@ -86,9 +86,6 @@ set undodir=$HOME/.vim/undo " Where to save histories
 set undolevels=1000         " How many undos
 set undoreload=10000        " Number of lines to save
 
-" Disable mouse input
-set mouse=
-
 " Misc
 set bufhidden=hide         " Hide buffer when not in window
 set browsedir=current      " Open the browser at the current working dir
