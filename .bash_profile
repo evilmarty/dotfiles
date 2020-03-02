@@ -39,8 +39,7 @@ alias packer='aws-vault exec --assume-role-ttl=1h build -- /usr/local/bin/packer
 
 # Exports
 export EDITOR="nvim"
-export GNUBIN="$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix gnu-sed)/libexec/gnubin"
-export PATH="~/bin:/usr/local/bin:/usr/local/opt/ruby/bin:$GNUPATH:$PATH"
+export PATH="~/bin:/usr/local/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 
