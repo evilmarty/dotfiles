@@ -1,8 +1,5 @@
-BUNDLE_PATH=$(HOME)/.vim/bundle
-VUNDLE_PATH=$(BUNDLE_PATH)/Vundle.vim
-VUNDLE_URL=https://github.com/gmarik/Vundle.vim.git
+VIM_PLUG_URL="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
 CONFIG_PATH=$(HOME)/.config
-CACHE_PATH=$(HOME)/.cache
 HOMEBREW=$(shell which brew)
 
 home: FORCE
@@ -20,15 +17,12 @@ endif
 	brew bundle --global
 
 vim: FORCE
-	mkdir -p $(BUNDLE_PATH)
-	if [ ! -d $(VUNDLE_PATH) ]; then git clone -q $(VUNDLE_URL) $(VUNDLE_PATH) 2> /dev/null; fi
+	curl -fLo ~/.vim/autoload/plug.vim --create-dirs "$(VIM_PLUG_URL)"
 	vim +PluginInstall +qall
 
 nvim: FORCE
-	mkdir -p $(CACHE_PATH)/dein
-	curl -s https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh | sh -s $(CACHE_PATH)/dein
-	pip3 install --upgrade neovim
-	nvim -c 'call dein#install()'
+	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs "$(VIM_PLUG_URL)"
+	nvim -c ':PlugInstall' -c ':qall'
 
 iterm: config
 	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(CONFIG_PATH)/iterm"

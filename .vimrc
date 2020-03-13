@@ -1,27 +1,22 @@
-" Vundle
 set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'tpope/vim-surround'
-Plugin 'kien/ctrlp.vim'
-Plugin 'KeitaNakamura/neodark.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'matze/vim-move'
-Plugin 'mustache/vim-mode'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'groenewege/vim-less'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'fatih/vim-go'
-Plugin 'edkolev/promptline.vim'
+Plug '/usr/local/opt/fzf/plugin/fzf.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
+Plug 'hashivim/vim-terraform'
+Plug 'itchyny/lightline.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-commentary'
+Plug 'vito-c/jq.vim'
+Plug 'elixir-editors/vim-elixir'
 
-call vundle#end()
+call plug#end()
+
 filetype plugin indent on
 
 runtime macros/matchit.vim " Match pairs of keywords (Eg: def, end)
@@ -89,43 +84,3 @@ let g:netrw_banner=0            " Disable banner
 let g:netrw_liststyle=3         " Tree
 let g:netrw_sort_options="i"    " Ignore case when sorting
 let g:netrw_browse_split=0      " Open files in same window
-
-" Airline
-set laststatus=2
-let g:airline_powerline_fonts = 1
-
-" Theme
-colorscheme neodark
-
-" GUI
-if has("gui_running")
-  set background=dark
-  colorscheme solarized
-  set guifont=Monaco:h13
-  set guioptions=-t " Hide toolbar
-  set guioptions=+c " Disable dialogues
-endif
-
-" MacVim
-if has("gui_macvim")
-  autocmd FocusLost * nested :silent! wall " Save all buffers when focus is lost
-  " Command-][ to increase/decrease indentation
-  vmap <D-]> >gv
-  vmap <D-[> <gv
-  " Command-T to CtrlP
-  "macmenu &File.New\ Tab key=<nop>
-  map <D-t> :CtrlP<CR>
-else
-  " Copy to OSX clipboard when not running Macvim
-  vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
-  nmap <C-v> :call setreg("\"",system("pbpaste"))<CR><CR>p
-endif
-
-" CtrlP
-let g:ctrlp_user_command = {
-  \ 'types': {
-    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
-    \ },
-  \ 'fallback': 'find %s -type f'
-  \ }
-

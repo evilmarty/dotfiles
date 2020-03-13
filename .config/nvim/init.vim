@@ -4,34 +4,25 @@ endif
 
 filetype plugin indent on
 
-" Required:
-set runtimepath^=~/.cache/dein/repos/github.com/Shougo/dein.vim
+call plug#begin(stdpath('data') . '/plugged')
 
-" Required:
-if dein#load_state(expand('~/.cache/dein'))
-  call dein#begin(expand('~/.cache/dein'))
+Plug '/usr/local/opt/fzf/plugin/fzf.vim'
+Plug 'junegunn/fzf.vim'
+Plug 'Shougo/deoplete.nvim'
+Plug 'airblade/vim-gitgutter'
+Plug 'fatih/vim-go'
+Plug 'hashivim/vim-terraform'
+Plug 'itchyny/lightline.vim'
+Plug 'nanotech/jellybeans.vim'
+Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-commentary'
+Plug 'vito-c/jq.vim'
+Plug 'elixir-editors/vim-elixir'
 
-  call dein#add('~/.cache/dein')
-  call dein#add('/usr/local/opt/fzf/plugin/fzf.vim')
-  call dein#add('Shougo/deoplete.nvim')
-  call dein#add('airblade/vim-gitgutter')
-  call dein#add('fatih/vim-go')
-  call dein#add('hashivim/vim-terraform')
-  call dein#add('itchyny/lightline.vim')
-  call dein#add('nanotech/jellybeans.vim')
-  call dein#add('ryanoasis/vim-devicons')
-  call dein#add('tpope/vim-commentary')
-  call dein#add('vito-c/jq.vim')
-  call dein#add('elixir-editors/vim-elixir')
+call plug#end()
 
-  call dein#end()
-  call dein#save_state()
-endif
-
+" Enable deoplete
 let g:deoplete#enable_at_startup = 1
-
-" Ctrl-P: Exclude .git and files in .gitingore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " For Neovim 0.1.3 and 0.1.4
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
