@@ -23,6 +23,7 @@ vim: FORCE
 nvim: FORCE
 	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs "$(VIM_PLUG_URL)"
 	nvim -c ':PlugInstall' -c ':qall'
+	pip3 install --user pynvim
 
 iterm: config
 	defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "$(CONFIG_PATH)/iterm"

@@ -8,7 +8,13 @@ call plug#begin(stdpath('data') . '/plugged')
 
 Plug '/usr/local/opt/fzf/plugin/fzf.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
