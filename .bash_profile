@@ -43,6 +43,7 @@ export EDITOR="nvim"
 export PATH="~/bin:/usr/local/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
+export ERL_AFLAGS="-kernel shell_history enabled"
 
 # Source all shell files
 for f in ~/.bash_profile.d/*; do [ -f "$f" ] && source $f; done
