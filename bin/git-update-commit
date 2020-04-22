@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 main() {
   local last_revision=$(git rev-parse HEAD)
 
