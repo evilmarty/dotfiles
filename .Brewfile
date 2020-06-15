@@ -34,3 +34,4 @@ cask "itch"                      # itch.io client
 mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
 mas "NextDNS", id: 1464122853
+mas "PiPifier - PiP for nearly every video", id: 1160374471
