@@ -6,7 +6,6 @@ brew "coreutils"
 brew "gnu-sed"
 brew "bash"                      # Use latest bash
 brew "bash-completion"
-brew "ag"                        # the_silver_searcher
 brew "git"
 brew "hub"                       # Enhance git
 brew "vim"                       # Don't use native vim
