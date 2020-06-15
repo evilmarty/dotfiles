@@ -25,7 +25,6 @@ cask "numi"                      # A better calculator
 cask "qlmarkdown"                # Quickview markdown files
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
 cask "spotify"                   # Current music player service
-cask "keybase"
 cask "signal"                    # e2e multi-device/platform chat
 cask "docker"
 cask "flux"                      # A better "Night Shift™️"
