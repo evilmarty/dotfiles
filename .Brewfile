@@ -28,6 +28,8 @@ cask "spotify"                   # Current music player service
 cask "signal"                    # e2e multi-device/platform chat
 cask "docker"
 cask "flux"                      # A better "Night Shift™️"
+cask "steam"                     # Steam client
+cask "itch"                      # itch.io client
 
 mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
