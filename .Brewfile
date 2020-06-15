@@ -19,7 +19,6 @@ brew "fzf"                       # fuzzy finder for bash and (neo)vim
 brew "tldr"                      # community managed man pages
 
 cask "firefox"                   # The ONE web browser to rule them all
-cask "thunderbird"
 cask "vlc"                       # The ONE media player to rule them all
 cask "iterm2"                    # Replacement terminal app
 cask "numi"                      # A better calculator
