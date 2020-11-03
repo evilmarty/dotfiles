@@ -1,0 +1,7 @@
+if ( hash brew 2>/dev/null ); then
+  export GNUBIN="$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix gnu-sed)/libexec/gnubin"
+  export RUBYBIN="$(brew --prefix ruby)/bin"
+  export PATH="$RUBYBIN:$GNUBIN:$PATH"
+fi
+
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
