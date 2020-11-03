@@ -52,17 +52,25 @@ set nowb
 set noswapfile
 
 " Bindings
-nnoremap <LEADER>n :n .<CR>|                           " Open the filer manager at the current working directory
-nmap <LEADER>l :set list!<CR>|                         " Toggle list characters (Invisibles)
-map <LEADER>S :set spell!<CR>|                         " Toggle spell
-map <LEADER>F :AckFromSearch!<Space>|                  " Search visual selection
-map <LEADER>f :Ack!<Space>|                            " Search
-map <LEADER><left> :bprev<CR>|                         " Previous buffer
-map <LEADER><right> :bnext<CR>|                        " Next buffer
-nnoremap <Leader>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/|                " Search for word under cursor and substitute
-nnoremap // *<CR>                                      " Search for word under cursor
-vnoremap // y/<C-R>"<CR>                               " Search for selection
+nnoremap <LEADER>n :n .<CR>                          | " Open the filer manager at the current working directory
+nnoremap <silent> <LEADER><left> :bprev<CR>          | " Previous buffer
+nnoremap <silent> <LEADER><right> :bnext<CR>         | " Next buffer
+nnoremap ,<space> :nohlsearch<CR>                    | " Clean up search
+nnoremap <LEADER>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
+nnoremap <LEADER>S :%s/\<<C-r><C-w>\>/               | " Search for word under cursor and substitute
+nnoremap <LEADER>s :Rg <C-r><C-w><CR>                | " Search for word under cursor
+nnoremap <silent> <C-L> :ls<CR>                      | " List buffers
+nnoremap <silent> <LEADER>w :bd<CR>                  | " Close current buffer
+nnoremap <F12> :source $MYVIMRC<CR>                  | " F12 reloads the ~/.vimrc file
+nnoremap <silent> <C-P> :Files<CR>                   | " Search files using fzf
+
+" Theme
+colorscheme jellybeans
+let g:jellybeans_use_term_italics = 1
+let g:jellybeans_use_lowcolor_black = 1
+let g:jellybeans_overrides = {
+\  'background': { 'ctermbg': 'none', '256ctermbg': 'none', 'guibg': 'none' },
+\}
 
 " Window
 syntax enable       " Syntax highlighting
