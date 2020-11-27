@@ -1,5 +1,5 @@
-tap "caskroom/fonts"
-tap "caskroom/cask"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask"
 tap "spotify/public"
 
 brew "coreutils"
