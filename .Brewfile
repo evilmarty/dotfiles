@@ -35,3 +35,6 @@ mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
 mas "NextDNS", id: 1464122853
 mas "PiPifier - PiP for nearly every video", id: 1160374471
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "Keynote", id: 409183694
