@@ -18,6 +18,7 @@ brew "fd"                        # simpler version of find
 brew "fzf"                       # fuzzy finder for bash and (neo)vim
 brew "tldr"                      # community managed man pages
 brew "ripgrep"                   # Faster grep
+brew "direnv"                    # Project specific ENV vars
 
 cask "firefox"                   # The ONE web browser to rule them all
 cask "vlc"                       # The ONE media player to rule them all
