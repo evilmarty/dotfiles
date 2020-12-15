@@ -25,3 +25,4 @@ EOF
 fi
 eval `hub alias -s bash`
 
+eval `gh completion -s bash`

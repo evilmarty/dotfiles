@@ -8,6 +8,7 @@ brew "bash"                      # Use latest bash
 brew "bash-completion"
 brew "git"
 brew "hub"                       # Enhance git
+brew "gh"                        # Replacement to hub
 brew "vim"                       # Don't use native vim
 brew "neovim"
 brew "tmux"
