@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+PROTECTED_BRANCHES=(master main)
 PULL_REQUEST_TEMPLATE="\n# Please enter the message for your pull request. Lines starting\n# with '#' will be ignored, and an empty message aborts the commit.\n# On branch %s"
 
 abort() {
@@ -7,11 +8,14 @@ abort() {
   exit 1
 }
 
-branch=$(git rev-parse --abbrev-ref HEAD);
-if [ "$branch" == "master" ]; then
-  read -p "Branch name: " branch
-  git checkout -b $branch
-fi
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+new_branch="${1:-$current_branch}"
+while [[ " ${PROTECTED_BRANCHES[@]} " =~ "$new_branch" ]]; do
+  >&2 echo "$new_branch is protected."
+  read -p "New branch name: " new_branch
+done
+
+[ "$new_branch" != "$current_branch" ] && git checkout -b $new_branch
 
 git-multi-commit "$@" || abort
 git push origin $branch || abort
