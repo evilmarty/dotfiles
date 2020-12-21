@@ -74,9 +74,6 @@
 [help]
   autocorrect = 1
 
-[include]
-  path = ~/.gitconfig_local
-
 [merge]
   tool = opendiff
 
@@ -109,3 +106,6 @@
 [user]
   email = marty@zalega.me
   name = Marty Zalega
+
+[include]
+  path = ~/.gitconfig_local
