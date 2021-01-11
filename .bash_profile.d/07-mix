@@ -1,5 +1,7 @@
+# vi:syntax=sh
+#
 # Elixir Mix autocomplete
-
+# -----------------------
 _mix() {
   if ! type mix &> /dev/null || ! [ -e mix.exs ]; then
     return

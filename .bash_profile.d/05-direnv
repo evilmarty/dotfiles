@@ -1,1 +1,5 @@
+# vi:syntax=sh
+#
+# Direnv bash hook
+# ----------------
 eval "$(direnv hook bash)"
