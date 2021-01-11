@@ -2,4 +2,6 @@
 #
 # Direnv bash hook
 # ----------------
-eval "$(direnv hook bash)"
+if (hash direnv 2> /dev/null); then
+  eval "$(direnv hook bash)"
+fi

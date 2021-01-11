@@ -25,6 +25,11 @@ EOF
   # Ensure cached commands are cleared
   __git_all_commands=""
 fi
-eval `hub alias -s bash`
 
-eval `gh completion -s bash`
+if (hash hub 2>/dev/null); then
+  eval `hub alias -s bash`
+fi
+
+if (hash gh 2>/dev/null); then
+  eval `gh completion -s bash`
+fi

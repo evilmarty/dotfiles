@@ -2,10 +2,14 @@
 #
 # Homebrew bash integration and overrides
 # ---------------------------------------
-if ( hash brew 2>/dev/null ); then
-  export GNUBIN="$(brew --prefix coreutils)/libexec/gnubin:$(brew --prefix gnu-sed)/libexec/gnubin"
-  export RUBYBIN="$(brew --prefix ruby)/bin"
+HOMEBREW_PATH="/usr/local"
+PACKAGES_PATH="${HOMEBREW_PATH}/opt"
+BASH_COMPLETION_PATH="${HOMEBREW_PATH}/etc/profile.d/bash_completion.sh"
+
+if [ -d "$PACKAGES_PATH" ]; then
+  export GNUBIN="${PACKAGES_PATH}/coreutils)/libexec/gnubin:${PACKAGES_PATH}/gnu-sed/libexec/gnubin"
+  export RUBYBIN="${PACKAGES_PATH}/ruby/bin"
   export PATH="$RUBYBIN:$GNUBIN:$PATH"
 fi
 
-[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+[[ -r "$BASH_COMPLETION_PATH" ]] && . "$BASH_COMPLETION_PATH"
