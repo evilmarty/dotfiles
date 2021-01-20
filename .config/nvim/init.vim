@@ -102,6 +102,7 @@ nnoremap <silent> <C-L> :ls<CR>                      | " List buffers
 nnoremap <silent> <LEADER>w :bd<CR>                  | " Close current buffer
 nnoremap <F12> :source $MYVIMRC<CR>                  | " F12 reloads the ~/.vimrc file
 nnoremap <silent> <C-P> :Files<CR>                   | " Search files using fzf
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>        | " Highlight visual selection
 
 " Move block text
 vnoremap <silent> J :m '>+1gv=gv<CR>
