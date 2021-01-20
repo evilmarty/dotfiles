@@ -52,6 +52,7 @@ set number          " Show line numbers
 set relativenumber  " Show relative line numbers to current line
 set ruler           " Show cursor position
 set spelllang=en_au " Australian English
+set cursorline      " Highlight current line
 
 " Whitespace
 set list                      " Show invisibles by default
