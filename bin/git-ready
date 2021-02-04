@@ -1,5 +1,7 @@
+BRANCH="${1:-master}"
+
 git stash
-git checkout master
+git checkout "$BRANCH"
 git pull
 git stash pop
 git-prune-branches
