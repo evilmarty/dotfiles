@@ -1,10 +1,20 @@
-set nocompatible
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
 
 Plug '/usr/local/opt/fzf/plugin/fzf.vim'
 Plug 'junegunn/fzf.vim'
-Plug 'Shougo/deoplete.nvim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
@@ -17,11 +27,62 @@ Plug 'elixir-editors/vim-elixir'
 
 call plug#end()
 
-filetype plugin indent on
-
 runtime macros/matchit.vim " Match pairs of keywords (Eg: def, end)
 
-set backspace=2
+" Enable deoplete
+let g:deoplete#enable_at_startup = 1
+
+" Theme
+colorscheme jellybeans
+let g:jellybeans_use_term_italics = 1
+let g:jellybeans_use_lowcolor_black = 1
+let g:jellybeans_overrides = {
+\  'background': { 'ctermbg': 'none', '256ctermbg': 'none', 'guibg': 'none' },
+\}
+
+" Window
+syntax enable
+set number          " Show line numbers
+set relativenumber  " Show relative line numbers to current line
+set ruler           " Show cursor position
+set spelllang=en_au " Australian English
+set cursorline      " Highlight current line
+
+" Whitespace
+set list                      " Show invisibles by default
+set listchars=tab:▸\ ,trail:· " Show tabs, trailing whitespace and end of lines
+" set nowrap                    " Do not wrap lines
+set formatoptions=l
+set lbr
+set expandtab                 " Use spaces instead of tabs
+set smarttab                  " Be smart when using tabs ;-)
+set softtabstop=2             " 1 tab is 2 spaces
+set shiftwidth=2
+set tabstop=2
+set scrolloff=3
+set foldmethod=indent         " Fold based on indentation.
+set foldlevelstart=99         " Expand all folds by default.
+set noshowmode
+" Open splits at right side (and below)
+set splitright
+set splitbelow
+
+" Disable backup. No swap files.
+set nobackup
+set nowb
+set noswapfile
+
+" Persistent undo
+set undofile                " Save undo's after file closes
+set undodir=$HOME/.vim/undo " Where to save histories
+set undolevels=1000         " How many undos
+set undoreload=10000        " Number of lines to save
+
+" Misc
+set bufhidden=hide         " Hide buffer when not in window
+set browsedir=current      " Open the browser at the current working dir
+set grepprg=rg\ --vimgrep  " Use ripgrep as grep
+set rtp+=/usr/local/opt/fzf
 
 " Wildmenu
 set wildmenu
@@ -46,11 +107,6 @@ set foldlevelstart=99         " Expand all folds by default.
 
 autocmd BufWritePre <buffer> :%s/\s\+$//e " Strip whitespace from end of line
 
-" Disable backup. No swap files.
-set nobackup
-set nowb
-set noswapfile
-
 " Bindings
 nnoremap <LEADER>n :n .<CR>                          | " Open the filer manager at the current working directory
 nnoremap <silent> <LEADER><left> :bprev<CR>          | " Previous buffer
@@ -63,28 +119,15 @@ nnoremap <silent> <C-L> :ls<CR>                      | " List buffers
 nnoremap <silent> <LEADER>w :bd<CR>                  | " Close current buffer
 nnoremap <F12> :source $MYVIMRC<CR>                  | " F12 reloads the ~/.vimrc file
 nnoremap <silent> <C-P> :Files<CR>                   | " Search files using fzf
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>        | " Highlight visual selection
 
-" Theme
-colorscheme jellybeans
-let g:jellybeans_use_term_italics = 1
-let g:jellybeans_use_lowcolor_black = 1
-let g:jellybeans_overrides = {
-\  'background': { 'ctermbg': 'none', '256ctermbg': 'none', 'guibg': 'none' },
-\}
+" Move block text
+vnoremap <silent> J :m '>+1gv=gv<CR>
+vnoremap <silent> K :m '<-2gv=gv<CR>
 
-" Window
-syntax enable       " Syntax highlighting
-set hidden          " Allow hiding buffers with unsaved changes
-set number          " Show line numbers
-set relativenumber  " Show relative line numbers to current line
-set ruler           " Show cursor position
-set spelllang=en_au " Australian English
-
-" Persistent undo
-set undofile                " Save undo's after file closes
-set undodir=$HOME/.vim/undo " Where to save histories
-set undolevels=1000         " How many undos
-set undoreload=10000        " Number of lines to save
+" A trick for when you forgot to sudo before editing a file that requires root privileges (typically /etc/hosts).
+" This lets you use w!! to do that after you opened the file already:
+cmap w!! w !sudo tee % >/dev/null
 
 " File manager
 let g:netrw_list_hide= '^\..*$' " Hide dotfiles

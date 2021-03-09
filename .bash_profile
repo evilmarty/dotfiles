@@ -9,9 +9,6 @@ alias tunnel='ssh -D 1080 -N -T'
 alias ssh-stop='ssh -O stop'
 alias sssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking no"'
 alias nv='nvim'
-alias vim='nvim'
-alias vi='nvim'
-alias vimdiff='nvim -d'
 alias gitl='git log'
 alias gits='git status'
 alias gitc='git commit'
@@ -24,7 +21,7 @@ alias docker-clean='docker images --quiet --filter "dangling=true" | xargs docke
 alias dc='docker-compose'
 
 # Exports
-export EDITOR="nvim"
+export EDITOR="vim"
 export PATH="~/bin:/usr/local/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
