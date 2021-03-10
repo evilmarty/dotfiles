@@ -32,6 +32,9 @@ runtime macros/matchit.vim " Match pairs of keywords (Eg: def, end)
 " Enable deoplete
 let g:deoplete#enable_at_startup = 1
 
+" Enable Terraform format on save
+let g:terraform_fmt_on_save = 1
+
 " Theme
 colorscheme jellybeans
 let g:jellybeans_use_term_italics = 1
