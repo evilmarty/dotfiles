@@ -3,11 +3,27 @@
 # Homebrew bash integration and overrides
 # ---------------------------------------
 HOMEBREW_PATH="/usr/local"
+for path in /opt/homebrew /usr/local; do
+  if [ -d "$path" ]; then
+    HOMEBREW_PATH="$path"
+    break
+  fi
+done
+
+if [ ! -d "$HOMEBREW_PATH" ]; then
+  exit
+fi
+
+HOMEBREW_BIN="${HOMEBREW_PATH}/bin"
 PACKAGES_PATH="${HOMEBREW_PATH}/opt"
 BASH_COMPLETION_PATH="${HOMEBREW_PATH}/etc/profile.d/bash_completion.sh"
 
+if [ -d "$HOMEBREW_BIN" ]; then
+  export PATH="$HOMEBREW_BIN:$PATH"
+fi
+
 if [ -d "$PACKAGES_PATH" ]; then
-  export GNUBIN="${PACKAGES_PATH}/coreutils)/libexec/gnubin:${PACKAGES_PATH}/gnu-sed/libexec/gnubin"
+  export GNUBIN="${PACKAGES_PATH}/coreutils/libexec/gnubin:${PACKAGES_PATH}/gnu-sed/libexec/gnubin"
   export RUBYBIN="${PACKAGES_PATH}/ruby/bin"
   export PATH="$RUBYBIN:$GNUBIN:$PATH"
 fi

@@ -22,7 +22,7 @@ alias dc='docker-compose'
 
 # Exports
 export EDITOR="vim"
-export PATH="~/bin:/usr/local/bin:$PATH"
+export PATH="~/bin:$PATH"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 export ERL_AFLAGS="-kernel shell_history enabled"
