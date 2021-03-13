@@ -51,7 +51,7 @@
   gpgsign = true
 
 [core]
-  editor = nvim
+  editor = vim
   quotepath = false
   trustctime = false
   precomposeunicode = false
