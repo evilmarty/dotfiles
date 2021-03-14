@@ -6,8 +6,7 @@ filetype plugin indent on
 
 call plug#begin('~/.vim/plugged')
 
-Plug '/usr/local/opt/fzf/plugin/fzf.vim'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf'
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
@@ -85,7 +84,6 @@ set undoreload=10000        " Number of lines to save
 set bufhidden=hide         " Hide buffer when not in window
 set browsedir=current      " Open the browser at the current working dir
 set grepprg=rg\ --vimgrep  " Use ripgrep as grep
-set rtp+=/usr/local/opt/fzf
 
 " Wildmenu
 set wildmenu
@@ -121,7 +119,7 @@ nnoremap <LEADER>s :Rg <C-r><C-w><CR>                | " Search for word under c
 nnoremap <silent> <C-L> :ls<CR>                      | " List buffers
 nnoremap <silent> <LEADER>w :bd<CR>                  | " Close current buffer
 nnoremap <F12> :source $MYVIMRC<CR>                  | " F12 reloads the ~/.vimrc file
-nnoremap <silent> <C-P> :Files<CR>                   | " Search files using fzf
+nnoremap <silent> <C-P> :FZF<CR>                     | " Search files using fzf
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>        | " Highlight visual selection
 
 " Move block text
