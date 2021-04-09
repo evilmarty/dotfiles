@@ -112,3 +112,5 @@
 
 [include]
   path = ~/.gitconfig_local
+[init]
+  defaultBranch = main
