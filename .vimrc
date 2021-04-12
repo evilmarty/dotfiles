@@ -81,9 +81,10 @@ set undolevels=1000         " How many undos
 set undoreload=10000        " Number of lines to save
 
 " Misc
-set bufhidden=hide         " Hide buffer when not in window
-set browsedir=current      " Open the browser at the current working dir
-set grepprg=rg\ --vimgrep  " Use ripgrep as grep
+set bufhidden=hide             " Hide buffer when not in window
+set browsedir=current          " Open the browser at the current working dir
+set grepprg=rg\ --vimgrep      " Use ripgrep as grep
+set backspace=indent,eol,start " Make backspace act like normal
 
 " Wildmenu
 set wildmenu
