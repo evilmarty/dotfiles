@@ -1,4 +1,6 @@
-BRANCH="${1:-master}"
+#!/usr/bin/env bash
+DEFAULT_BRANCH=`git config --get init.defaultbranch`
+BRANCH="${1:-$DEFAULT_BRANCH}"
 
 git stash
 git checkout "$BRANCH"
