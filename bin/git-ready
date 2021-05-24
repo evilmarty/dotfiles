@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-DEFAULT_BRANCH=`git config --get init.defaultbranch`
+DEFAULT_BRANCH=`git config --default master --get init.defaultbranch`
 BRANCH="${1:-$DEFAULT_BRANCH}"
 
 git stash
