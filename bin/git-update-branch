@@ -1,29 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
+DEFAULT_BRANCH=`git config --default master --get init.defaultbranch`
+BRANCH="${1:-$DEFAULT_BRANCH}"
 
-main() {
-  local branch=$(git rev-parse --abbrev-ref HEAD)
-  git-is-dirty && stash update "$branch" || update "$branch"
-}
-
-stash() {
-  git stash
-  command eval "$@"
-  git stash pop
-}
-
-update() {
-  [ "$1" == "master" ] || git checkout master
-
-  git pull origin
-
-  if [ "$1" != "master" ]; then
-    git checkout "$branch"
-    git rebase master
-  fi
-}
-
-confirm_force_push() {
-  confirm "Force push branch? " && git push origin --force
-}
-
-main "$@"
+git stash
+git checkout "$BRANCH"
+git pull
+git checkout -
+git rebase "$BRANCH"
+git stash pop

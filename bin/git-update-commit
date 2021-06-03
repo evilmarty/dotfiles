@@ -1,17 +1,18 @@
 #!/bin/bash
 
-set -e
+set -eu
 
 main() {
+  local branch=$(git config --default master --get init.defaultbranch)
   local last_revision=$(git rev-parse HEAD)
 
-  while git-is-dirty; do
+  while is_dirty; do
     git add --patch
     if [ $? -ne 0 ]; then
       local last_exit_status=$?
       break
     fi
-    commit=$(select_commit ${last_revision}...master)
+    commit=$(select_commit "${last_revision}...${branch}")
     if [ $? -ne 0 ]; then
       return $?
     fi
@@ -23,11 +24,11 @@ main() {
     return $last_exit_status
   fi
 
-  confirm_squash && confirm_force_push || confirm_push || true
+  confirm_squash "$branch" && confirm_force_push || confirm_push || true
 }
 
 confirm_squash() {
-  confirm "Squash branch?" && git rebase --autosquash -i master
+  confirm "Squash branch?" && git rebase --autosquash -i "$1"
 }
 
 confirm_push() {
@@ -39,7 +40,27 @@ confirm_force_push() {
 }
 
 select_commit() {
-  git log --format='%Cblue%h%Creset %s' "$@" | fzf --header='Select commit to fix up' | awk '{ print $1 }'
+  git log --color=always --oneline "$@" | \
+    fzf --ansi --no-sort --header='Select commit to fix up'  --preview 'git log -1 --color=always --pretty=full {1}' | \
+    awk '{ print $1 }'
 }
 
-git-branch-guard --fail && main "$@"
+is_dirty() {
+  if [ -n "$(git diff-index --name-only HEAD)" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
+
+confirm() {
+  read -p "$@ " choice
+  case "$choice" in
+    y|Y|yes|t|T|true|1 )
+      return 0;;
+    * )
+      return 1;;
+  esac
+}
+
+main "$@"
