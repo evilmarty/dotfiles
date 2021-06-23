@@ -31,6 +31,8 @@ cask "docker"
 
 mas "Xcode", id: 497799835
 mas "1Password 7 - Password Manager", id: 1333542190
+mas "Hush Nag Blocker", id: 1544743900
+mas "DuckDuckGo Privacy Essentials", id: 1482920575
 mas "NextDNS", id: 1464122853
 mas "PiPifier - PiP for nearly every video", id: 1160374471
 mas "Numbers", id: 409203825
