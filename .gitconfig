@@ -57,6 +57,9 @@
   precomposeunicode = false
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
+[init]
+  defaultBranch = main
+
 [diff]
   algorithm = patience
   renames = copies
@@ -87,6 +90,9 @@
 [push]
   default = current
 
+[pull]
+  rebase = true
+
 [url "git@github.com:"]
   insteadOf = "gh:"
   pushInsteadOf = "github:"
@@ -112,5 +118,3 @@
 
 [include]
   path = ~/.gitconfig_local
-[init]
-  defaultBranch = main
