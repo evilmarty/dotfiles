@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
-DEFAULT_BRANCH=`git config --get init.defaultbranch`
-git branch --merged | grep -v "\*" | grep -v "$DEFAULT_BRANCH" | xargs -n 1 git branch -d
+DEFAULT_BRANCH=`git config --default master --get init.defaultbranch`
+git branch --format '%(refname:lstrip=2)' --merged | grep -v "$DEFAULT_BRANCH" | xargs -n 1 git branch -d
