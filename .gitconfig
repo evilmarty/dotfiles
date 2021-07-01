@@ -19,6 +19,7 @@
   squash = rebase --autosquash -i
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   pb = checkout --orphan
+  pr = "!gh pr create"
 
 [apply]
   whitespace = fix
