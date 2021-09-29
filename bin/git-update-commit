@@ -41,7 +41,7 @@ confirm_force_push() {
 
 select_commit() {
   git log --color=always --oneline "$@" | \
-    fzf --ansi --no-sort --header='Select commit to fix up'  --preview 'git log -1 --color=always --pretty=full {1}' | \
+    fzf --ansi --no-sort --header='Select commit to fix up'  --preview 'git log -p -1 --color=always --pretty=full {1}' | \
     awk '{ print $1 }'
 }
 
