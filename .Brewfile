@@ -9,7 +9,6 @@ brew "bash-completion"
 brew "git"
 brew "gh"                        # Replacement to hub
 brew "vim"                       # Don't use native vim
-brew "neovim"
 brew "tmux"
 brew "reattach-to-user-namespace" # Required to fix macos copy/paste in tmux
 brew "gpg"

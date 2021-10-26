@@ -7,7 +7,7 @@ home: FORCE
 	git ls-files | xargs -n 1 -I % cp -f % $(HOME)/%
 	cp -fR .git $(HOME)
 
-install: homebrew vim nvim iterm
+install: homebrew vim iterm
 
 homebrew: $(HOMEBREW) .Brewfile
 ifndef $(HOMEBREW)
@@ -19,11 +19,6 @@ endif
 vim: FORCE
 	curl -fLo ~/.vim/autoload/plug.vim --create-dirs "$(VIM_PLUG_URL)"
 	vim -c ':PlugInstall' -c ':qall'
-	pip3 install --user pynvim
-
-nvim: FORCE
-	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs "$(VIM_PLUG_URL)"
-	nvim -c ':PlugInstall' -c ':qall'
 	pip3 install --user pynvim
 
 iterm: config
