@@ -18,6 +18,8 @@ brew "fzf"                       # fuzzy finder for bash and (neo)vim
 brew "lf"                        # terminal file manager
 brew "tldr"                      # community managed man pages
 brew "ripgrep"                   # Faster grep
+brew "less"                      # Use latest less
+brew "git-delta"                 # Better git pager
 brew "direnv"                    # Project specific ENV vars
 
 cask "firefox"                   # The ONE web browser to rule them all
