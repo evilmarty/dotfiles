@@ -118,7 +118,6 @@ nnoremap ,<space> :nohlsearch<CR>                    | " Clean up search
 nnoremap <LEADER>e :e <C-R>=expand('%:p:h') . '/'<CR>| " Edit file in same directory
 nnoremap <LEADER>S :%s/\<<C-r><C-w>\>/               | " Search for word under cursor and substitute
 nnoremap <LEADER>s :Rg <C-r><C-w><CR>                | " Search for word under cursor
-nnoremap <silent> <C-L> :ls<CR>                      | " List buffers
 nnoremap <silent> <LEADER>w :bd<CR>                  | " Close current buffer
 nnoremap <F12> :source $MYVIMRC<CR>                  | " F12 reloads the ~/.vimrc file
 nnoremap <silent> <C-P> :FZF<CR>                     | " Search files using fzf
