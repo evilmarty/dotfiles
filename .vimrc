@@ -29,6 +29,12 @@ call plug#end()
 
 runtime macros/matchit.vim " Match pairs of keywords (Eg: def, end)
 
+if (has("termguicolors"))
+  set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
 " Enable deoplete
 let g:deoplete#enable_at_startup = 1
 
