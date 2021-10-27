@@ -2,7 +2,8 @@
 
 # Aliases
 alias cat='bat'
-alias ll='ls --color -GFlash'
+alias ls='exa --git'
+alias ll='exa -Fla --git'
 alias rtest='ruby -Itest'
 alias tree='tree -C'
 alias tunnel='ssh -D 1080 -N -T'

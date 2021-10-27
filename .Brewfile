@@ -16,6 +16,7 @@ brew "bat"                       # cat with syntax highlighting
 brew "fd"                        # simpler version of find
 brew "fzf"                       # fuzzy finder for bash and (neo)vim
 brew "lf"                        # terminal file manager
+brew "exa"                       # Better ls
 brew "tldr"                      # community managed man pages
 brew "ripgrep"                   # Faster grep
 brew "less"                      # Use latest less
