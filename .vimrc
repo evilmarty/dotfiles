@@ -19,11 +19,11 @@ Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
 Plug 'itchyny/lightline.vim'
-Plug 'nanotech/jellybeans.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-commentary'
 Plug 'vito-c/jq.vim'
 Plug 'elixir-editors/vim-elixir'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 
@@ -42,12 +42,8 @@ let g:deoplete#enable_at_startup = 1
 let g:terraform_fmt_on_save = 1
 
 " Theme
-colorscheme jellybeans
-let g:jellybeans_use_term_italics = 1
-let g:jellybeans_use_lowcolor_black = 1
-let g:jellybeans_overrides = {
-\  'background': { 'ctermbg': 'none', '256ctermbg': 'none', 'guibg': 'none' },
-\}
+colorscheme dracula
+let g:dracula_colorterm = 0
 
 " Window
 syntax enable
