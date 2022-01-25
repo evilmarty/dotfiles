@@ -3,18 +3,12 @@ if &compatible
 endif
 
 filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
 Plug 'airblade/vim-gitgutter'
 Plug 'fatih/vim-go'
 Plug 'hashivim/vim-terraform'
