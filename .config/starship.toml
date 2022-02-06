@@ -1,6 +1,6 @@
 add_newline = false
-right_format = """$all"""
 continuation_prompt = "▶▶"
+command_timeout = 1000
 
 format = """
 $username\
@@ -17,6 +17,7 @@ $ruby\
 $elixir\
 $nodejs\
 $aws\
+${custom.aws}\
 $jobs\
 $character"""
 
@@ -24,7 +25,7 @@ $character"""
 disabled = true
 
 [directory]
-style = "blue"
+style = "green"
 
 [character]
 success_symbol = "[❯](purple)"
@@ -57,3 +58,9 @@ symbol = "⬢"
 
 [terraform]
 format = "[$symbol$version( $workspace)]($style) "
+
+[custom.aws]
+when = "test -d ~/.aws/sso/cache"
+command = "jq -rs 'map(select((.expiresAt | fromdate > now) and .startUrl)) | map(.expiresAt | fromdate | strflocaltime(\"%c\")) | first // \"X\"' ~/.aws/sso/cache/*.json"
+symbol = "☁️  "
+style = "bold yellow"
