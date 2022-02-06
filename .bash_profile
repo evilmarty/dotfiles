@@ -20,6 +20,7 @@ alias bu='bundle update'
 alias bo='bundle open'
 alias docker-clean='docker images --quiet --filter "dangling=true" | xargs docker rmi'
 alias dc='docker-compose'
+alias git-home='cd $(git rev-parse --show-toplevel)'
 
 # Exports
 export EDITOR="vim"
