@@ -16,8 +16,6 @@ $terraform\
 $ruby\
 $elixir\
 $nodejs\
-$aws\
-${custom.aws}\
 $jobs\
 $character"""
 
