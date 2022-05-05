@@ -1,6 +1,5 @@
 tap "homebrew/cask-fonts"
 tap "homebrew/cask"
-tap "spotify/public"
 
 brew "coreutils"
 brew "gnu-sed"
@@ -29,7 +28,6 @@ cask "vlc"                       # The ONE media player to rule them all
 cask "iterm2"                    # Replacement terminal app
 cask "qlmarkdown"                # Quickview markdown files
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
-cask "spotify"                   # Current music player service
 cask "docker"
 
 mas "Xcode", id: 497799835
