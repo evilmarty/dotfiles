@@ -39,4 +39,5 @@ mas "PiPifier - PiP for nearly every video", id: 1160374471
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Keynote", id: 409183694
+mas "Noir - Dark Mode for Safari", id: 1592917505
 mas "1Password for Safari", id: 1569813296
