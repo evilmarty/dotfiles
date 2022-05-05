@@ -23,6 +23,7 @@ brew "git-delta"                 # Better git pager
 brew "direnv"                    # Project specific ENV vars
 brew "starship"                  # Terminal prompt
 
+cask "1password"                 # Password manager
 cask "firefox"                   # The ONE web browser to rule them all
 cask "iterm2"                    # Replacement terminal app
 cask "qlmarkdown"                # Quickview markdown files
@@ -38,3 +39,4 @@ mas "PiPifier - PiP for nearly every video", id: 1160374471
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Keynote", id: 409183694
+mas "1Password for Safari", id: 1569813296
