@@ -24,7 +24,6 @@ brew "direnv"                    # Project specific ENV vars
 brew "starship"                  # Terminal prompt
 
 cask "firefox"                   # The ONE web browser to rule them all
-cask "vlc"                       # The ONE media player to rule them all
 cask "iterm2"                    # Replacement terminal app
 cask "qlmarkdown"                # Quickview markdown files
 cask "aws-vault"                 # macOS Keychain wrapper for AWS API
