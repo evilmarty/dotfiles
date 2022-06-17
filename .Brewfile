@@ -26,7 +26,6 @@ cask "1password"                 # Password manager
 cask "firefox"                   # The ONE web browser to rule them all
 cask "iterm2"                    # Replacement terminal app
 cask "qlmarkdown"                # Quickview markdown files
-cask "aws-vault"                 # macOS Keychain wrapper for AWS API
 cask "docker"
 
 mas "Xcode", id: 497799835
