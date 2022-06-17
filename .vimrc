@@ -35,6 +35,9 @@ let g:deoplete#enable_at_startup = 1
 " Enable Terraform format on save
 let g:terraform_fmt_on_save = 1
 
+" Don't use Gopls
+let g:go_gopls_enabled = 0
+
 " Theme
 colorscheme dracula
 let g:dracula_colorterm = 0
