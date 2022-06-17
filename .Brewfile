@@ -20,7 +20,6 @@ brew "tldr"                      # community managed man pages
 brew "ripgrep"                   # Faster grep
 brew "less"                      # Use latest less
 brew "git-delta"                 # Better git pager
-brew "direnv"                    # Project specific ENV vars
 brew "starship"                  # Terminal prompt
 
 cask "1password"                 # Password manager

@@ -1,7 +1,0 @@
-# vi:syntax=sh
-#
-# Direnv bash hook
-# ----------------
-if (hash direnv 2> /dev/null); then
-  eval "$(direnv hook bash)"
-fi
