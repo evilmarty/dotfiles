@@ -4,7 +4,7 @@ BRANCH="${1:-$DEFAULT_BRANCH}"
 
 git stash
 git checkout "$BRANCH"
-git pull
+git pull origin "$BRANCH"
 git checkout -
 git rebase "$BRANCH"
 git stash pop
