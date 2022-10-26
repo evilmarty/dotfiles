@@ -21,6 +21,8 @@
   pb = checkout --orphan
   pr = "!gh pr create"
   ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; git stash; git checkout \"$b\"; git pull origin \"$b\"; git stash pop; }; f"
+  only-main = "!git branch --no-merged | xargs git branch -D"
+  root = rev-parse --show-toplevel
 
 [apply]
   whitespace = fix
@@ -136,9 +138,6 @@
 
 [url "git://github.com/"]
   insteadOf = "github:"
-
-[url "git@github.com:"]
-  insteadOf = "https://github.com/"
 
 [url "git@gitlab.com:"]
   insteadOf = "gl:"
