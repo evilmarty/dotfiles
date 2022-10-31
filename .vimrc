@@ -137,3 +137,7 @@ let g:netrw_banner=0            " Disable banner
 let g:netrw_liststyle=3         " Tree
 let g:netrw_sort_options="i"    " Ignore case when sorting
 let g:netrw_browse_split=0      " Open files in same window
+
+" Skeletons
+autocmd BufNewFile readme.md 0r ~/.vim/skeletons/readme.md
+autocmd BufNewFile *.sh 0r ~/skeletons/bash.sh
