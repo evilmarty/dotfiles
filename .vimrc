@@ -140,4 +140,4 @@ let g:netrw_browse_split=0      " Open files in same window
 
 " Skeletons
 autocmd BufNewFile readme.md 0r ~/.vim/skeletons/readme.md
-autocmd BufNewFile *.sh 0r ~/skeletons/bash.sh
+autocmd BufNewFile *.sh 0r ~/.vim/skeletons/bash.sh
