@@ -23,6 +23,7 @@
   ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; git stash; git checkout \"$b\"; git pull origin \"$b\"; git stash pop; }; f"
   only-main = "!git branch --no-merged | xargs git branch -D"
   root = rev-parse --show-toplevel
+  hash = log --pretty=format:'%H'
 
 [apply]
   whitespace = fix
