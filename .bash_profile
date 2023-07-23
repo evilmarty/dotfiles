@@ -20,7 +20,7 @@ alias cpv='rsync -ah --info=progress2'
 
 # Exports
 export EDITOR="nvim"
-export PATH="~/bin:$PATH"
+export PATH="~/bin:$PATH:~/.local/bin"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 export ERL_AFLAGS="-kernel shell_history enabled"
