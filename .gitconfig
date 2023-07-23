@@ -73,7 +73,13 @@
   textconv = hexdump -v -C
 
 [difftool]
-  prompt = false
+  prompt = true
+
+[diff]
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 
 [filter "media"]
   clean = git-media-clean %f
