@@ -1,5 +1,11 @@
 return {
   {
+    "rcarriga/nvim-notify",
+    opts = {
+      background_colour = "#000000",
+    },
+  },
+  {
     "navarasu/onedark.nvim",
     priority = 1000,
     config = function()
