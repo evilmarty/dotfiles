@@ -14,9 +14,12 @@ alias gits='git status'
 alias gitc='git commit'
 alias gitp='git pull'
 alias dc='docker-compose'
-alias rgg='rg --files | rg'
 alias git-home='cd $(git rev-parse --show-toplevel)'
 alias cpv='rsync -ah --info=progress2'
+
+function rgf {
+  rg --files ${@:2} | rg $1
+}
 
 # Exports
 export EDITOR="nvim"
