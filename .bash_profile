@@ -2,8 +2,8 @@
 
 # Aliases
 alias cat='bat'
-alias ls='exa --git'
-alias ll='exa -Fla --git'
+alias ls='eza --git'
+alias ll='eza -Fla --git'
 alias tree='tree -C'
 alias ssh-stop='ssh -O stop'
 alias sssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking no"'
