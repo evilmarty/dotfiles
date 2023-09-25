@@ -1,29 +1,30 @@
 [alias]
-  s = status
-  co = checkout
-  cp = cherry-pick
+  a = commit -v --amend --reuse-message=HEAD
+  abort = rebase --abort
+  br = branch
   c = commit -pv
   cm = commit -m
-  fu = commit --fixup
-  br = branch
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  l = log
-  a = commit -v --amend --reuse-message=HEAD
-  cu = commit --amend
-  nb = "!f() { (git branch -D \"$1\" 2> /dev/null || true) && git checkout -b \"$1\"; }; f"
-  wipe = reset --hard
-  abort = rebase --abort
+  co = checkout
   cont = rebase --continue
-  yolo = push --force
-  pop = stash pop
-  squash = rebase --autosquash -i
+  cp = cherry-pick
+  cu = commit --amend
+  fu = commit --fixup
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+  hash = log --pretty=format:'%H'
+  l = log
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  mff = merge --ff-only
+  nb = "!f() { (git branch -D \"$1\" 2> /dev/null || true) && git checkout -b \"$1\"; }; f"
+  only-main = "!git branch --no-merged | xargs git branch -D"
   pb = checkout --orphan
+  pop = stash pop
   pr = "!gh pr create"
   ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; git stash; git checkout \"$b\"; git pull origin \"$b\"; git stash pop; }; f"
-  only-main = "!git branch --no-merged | xargs git branch -D"
   root = rev-parse --show-toplevel
-  hash = log --pretty=format:'%H'
+  s = status
+  squash = rebase --autosquash -i
+  wipe = reset --hard
+  yolo = push --force
 
 [apply]
   whitespace = fix
@@ -42,10 +43,10 @@
   remote = green
 
 [color "diff"]
-  meta = yellow bold
   frag = magenta bold
-  old = red bold
+  meta = yellow bold
   new = green bold
+  old = red bold
 
 [color "status"]
   added = yellow
@@ -57,9 +58,9 @@
 
 [core]
   editor = vim
+  precomposeunicode = false
   quotepath = false
   trustctime = false
-  precomposeunicode = false
   whitespace = space-before-tab,-indent-with-non-tab,trailing-space
 
 [init]
