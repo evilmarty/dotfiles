@@ -6,19 +6,21 @@
   cm = commit -m
   co = checkout
   cont = rebase --continue
+  contains = branch --contains
   cp = cherry-pick
   cu = commit --amend
+  empty-commit = commit --allow-empty
   fu = commit --fixup
   go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
   hash = log --pretty=format:'%H'
   l = log
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  mff = merge --ff-only
+  ff = merge --ff-only
   nb = "!f() { (git branch -D \"$1\" 2> /dev/null || true) && git checkout -b \"$1\"; }; f"
   only-main = "!git branch --no-merged | xargs git branch -D"
   pb = checkout --orphan
   pop = stash pop
-  pr = "!gh pr create"
+  pr = "!gh pr create $(for label in $(git config --get-all pr.label.name); do echo --label $label; done)"
   ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; git stash; git checkout \"$b\"; git pull origin \"$b\"; git stash pop; }; f"
   root = rev-parse --show-toplevel
   s = status
