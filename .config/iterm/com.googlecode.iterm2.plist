@@ -3264,5 +3264,7 @@
 	<false/>
 	<key>kCPKUseSystemColorPicker</key>
 	<false/>
+	<key>kTurnOffSlowTriggersOfferUserDefaultsKey</key>
+	<false/>
 </dict>
 </plist>
