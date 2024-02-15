@@ -22,6 +22,7 @@ brew "less"                      # Use latest less
 brew "git-delta"                 # Better git pager
 brew "starship"                  # Terminal prompt
 brew "direnv"
+brew "zoxide"                    # Better cd
 
 cask "1password"                 # Password manager
 cask "firefox"                   # The ONE web browser to rule them all
