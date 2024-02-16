@@ -29,13 +29,13 @@ cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
 
 cask "1password"                 # Password manager
+cask "1password-cli"             # CLI for 1Password
 cask "firefox"                   # The ONE web browser to rule them all
 cask "iterm2"                    # Replacement terminal app
 cask "qlmarkdown"                # Quickview markdown files
 cask "docker"
 
 mas "Xcode", id: 497799835
-mas "1Password 7 - Password Manager", id: 1333542190
 mas "Hush Nag Blocker", id: 1544743900
 mas "DuckDuckGo Privacy Essentials", id: 1482920575
 mas "NextDNS", id: 1464122853
