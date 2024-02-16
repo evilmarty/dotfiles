@@ -33,6 +33,11 @@
 
 [branch]
   autosetuprebase = always
+  sort = -committerdate
+
+[fetch]
+  prune = true
+  prunetags = true
 
 [color]
   branch = auto
@@ -69,7 +74,7 @@
   defaultBranch = main
 
 [diff]
-  algorithm = patience
+  algorithm = histogram
   renames = copies
 
 [diff "bin"]
@@ -92,10 +97,11 @@
   autocorrect = 1
 
 [merge]
+  conflictstyle = zdiff3
+  keepbackup = false
   guitool = opendiff
 
 [mergetool]
-  keepBackup = false
   prompt = false
 
 [push]
@@ -103,6 +109,13 @@
 
 [pull]
   rebase = true
+
+[rebase]
+  autostash = true
+  updaterefs = true
+
+[rerere]
+  enabled = true
 
 [pager]
   diff = delta
