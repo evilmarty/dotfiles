@@ -24,6 +24,10 @@ brew "starship"                  # Terminal prompt
 brew "direnv"
 brew "zoxide"                    # Better cd
 
+# Terminal font with nerdfont support
+cask "font-fira-code-nerd-font"
+cask "font-fira-mono-nerd-font"
+
 cask "1password"                 # Password manager
 cask "firefox"                   # The ONE web browser to rule them all
 cask "iterm2"                    # Replacement terminal app
