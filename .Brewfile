@@ -45,3 +45,4 @@ mas "Pages", id: 409201541
 mas "Keynote", id: 409183694
 mas "Noir - Dark Mode for Safari", id: 1592917505
 mas "1Password for Safari", id: 1569813296
+mas "Userscripts", id: 1463298887
