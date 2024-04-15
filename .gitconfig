@@ -125,7 +125,7 @@
   show = delta
 
 [interactive]
-  diffFilter = delta --color-only --features=interactive
+  diffFilter = delta --color-only
 
 [delta]
   features = decorations
