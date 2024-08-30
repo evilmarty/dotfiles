@@ -20,6 +20,7 @@
   only-main = "!git branch --no-merged | xargs git branch -D"
   pb = checkout --orphan
   pop = stash pop
+  drop = stash drop
   pr = "!gh pr create $(for label in $(git config --get-all pr.label.name); do echo --label $label; done)"
   ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; local s=\"$(git stash push)\"; git checkout \"$b\"; git pull origin \"$b\"; [ \"$s\" != \"No local changes to save\" ] && git stash pop; }; f"
   root = rev-parse --show-toplevel
@@ -28,6 +29,7 @@
   wipe = reset --hard
   yolo = push --force
   add-untracked = "!git add $(git ls-files -o --exclude-standard)"
+  update = "!git pull origin $(git rev-parse --abbrev-ref HEAD)"
 
 [apply]
   whitespace = fix
