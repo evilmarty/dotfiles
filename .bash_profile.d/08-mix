@@ -3,15 +3,15 @@
 # Elixir Mix autocomplete
 # -----------------------
 _mix() {
-  if ! type mix &> /dev/null || ! [ -e mix.exs ]; then
+  if ! hash mix &> /dev/null || ! [ -e mix.exs ]; then
     return
   fi
 
   local current_mix_md5
 
-  if type "md5" &>/dev/null; then
+  if hash "md5" &>/dev/null; then
     current_mix_md5=`md5 -q mix.exs`
-  elif type "md5sum" &>/dev/null; then
+  elif hash "md5sum" &>/dev/null; then
     current_mix_md5=`md5sum mix.exs | awk '{ print $1 }'`
   else
     # no either md5 or md5sum
