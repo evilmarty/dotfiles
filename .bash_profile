@@ -27,5 +27,13 @@ export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 export ERL_AFLAGS="-kernel shell_history enabled"
 export GPG_TTY=$(tty)
 
+if [[ -n "${ZSH_VERSION-}" ]]; then
+  export SHELL_NAME="zsh"
+elif [[ -n "${BASH_VERSION-}" ]]; then
+  export SHELL_NAME="bash"
+else
+  export SHELL_NAME="${SHELL##*/}"
+fi
+
 # Source all shell files
 for f in ~/.bash_profile.d/*; do [ -f "$f" ] && source $f; done

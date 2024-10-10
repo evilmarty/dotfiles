@@ -17,7 +17,6 @@ fi
 HOMEBREW_BIN="${HOMEBREW_PATH}/bin"
 HOMEBREW_SBIN="${HOMEBREW_PATH}/sbin"
 PACKAGES_PATH="${HOMEBREW_PATH}/opt"
-BASH_COMPLETION_PATH="${HOMEBREW_PATH}/etc/profile.d/bash_completion.sh"
 
 for x in bin sbin; do
   if [ -d "$HOMEBREW_PATH/$x" ]; then
@@ -31,4 +30,5 @@ if [ -d "$PACKAGES_PATH" ]; then
   export PATH="$RUBYBIN:$GNUBIN:$PATH"
 fi
 
-[[ -r "$BASH_COMPLETION_PATH" ]] && . "$BASH_COMPLETION_PATH"
+SHELL_COMPLETION_PATH="${HOMEBREW_PATH}/etc/profile.d/${SHELL_NAME:-bash}_completion.sh"
+[[ -r "$SHELL_COMPLETION_PATH" ]] && source "$SHELL_COMPLETION_PATH"

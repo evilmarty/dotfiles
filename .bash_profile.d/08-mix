@@ -38,4 +38,6 @@ _mix_task_list() {
   '
 }
 
-complete -F _mix mix
+if [[ -z "$ZSH_VERSION" ]]; then
+  complete -F _mix mix
+fi

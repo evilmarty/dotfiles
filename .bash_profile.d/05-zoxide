@@ -3,5 +3,5 @@
 # Zoxide shell integration
 # ------------------------
 if hash zoxide 2>/dev/null; then
-  eval "$(zoxide init --cmd cd bash)"
+  eval "$(zoxide init --cmd cd "${SHELL_NAME:-bash}")"
 fi

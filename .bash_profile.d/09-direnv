@@ -3,5 +3,5 @@
 # Direnv shell integration
 # ------------------------
 if hash direnv 2>/dev/null; then
-  eval "$(direnv hook bash)"
+  eval "$(direnv hook "${SHELL_NAME:-bash}")"
 fi

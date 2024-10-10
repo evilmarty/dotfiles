@@ -24,6 +24,7 @@
 #       see git-prompt.sh for details.
 
 if [[ -n ${ZSH_VERSION-} ]]; then
+  return # Don't run
 	autoload -U +X bashcompinit && bashcompinit
 fi
 

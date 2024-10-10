@@ -22,9 +22,11 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "${FZF_PATH}/shell/completion.bash" 2> /dev/null
+SHELL_COMPLETION_PATH="${FZF_PATH}/shell/completion.${SHELL_NAME:-bash}"
+[[ $- == *i* && -f "$SHELL_COMPLETION_PATH" ]] && source "$SHELL_COMPLETION_PATH"
 
 # Key bindings
 # ------------
-source "${FZF_PATH}/shell/key-bindings.bash"
+KEY_BINDINGS_PATH="${FZF_PATH}/shell/key-bindings.${SHELL_NAME:-bash}"
+[[ -f "$KEY_BINDINGS_PATH" ]] && source "$KEY_BINDINGS_PATH"
 
