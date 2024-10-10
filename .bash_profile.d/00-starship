@@ -1,2 +1,6 @@
+# vi:syntax=sh
+#
+# Initialize Starship prompt
+# ---------------------------------------
 SHELL_NAME="${SHELL##*/}"
 hash starship 2>/dev/null && eval "$(starship init "$SHELL_NAME")"

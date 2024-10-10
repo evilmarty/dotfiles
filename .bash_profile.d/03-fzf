@@ -1,6 +1,7 @@
+# vi:syntax=sh
+#
 # Setup fzf
 # ---------
-
 for path in /usr/local/opt/fzf /opt/homebrew/opt/fzf; do
   if [ -d "$path" ]; then
     FZF_PATH="$path"

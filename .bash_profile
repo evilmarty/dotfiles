@@ -1,5 +1,3 @@
-#!/usr/bin/env sh
-
 # Aliases
 alias cat='bat'
 alias ls='eza --git'
