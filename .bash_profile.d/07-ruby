@@ -1,6 +1,0 @@
-# vi:syntax=sh
-#
-# Ruby gems in path
-# -----------------
-GEM_PATH=`ruby -e 'puts Gem.path.map{|p|File.join(p, "bin")}.select(&File.method(:exist?)).join(":")'`
-export PATH="${PATH}:${GEM_PATH}"
