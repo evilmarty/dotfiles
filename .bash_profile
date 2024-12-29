@@ -14,14 +14,15 @@ alias gitp='git pull'
 alias dc='docker-compose'
 alias git-home='cd $(git rev-parse --show-toplevel)'
 alias cpv='rsync -ah --info=progress2'
+alias sizeof='du --human-readable --summarize'
 
 function rgf {
-  rg --files ${@:2} | rg $1
+  rg --files "${@:2}" | rg "$1"
 }
 
 # Exports
 export EDITOR="nvim"
-export PATH="~/bin:$PATH:~/.local/bin"
+export PATH="${HOME}/bin:${PATH}:${HOME}/.local/bin"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -36,4 +37,4 @@ else
 fi
 
 # Source all shell files
-for f in ~/.bash_profile.d/*; do [ -f "$f" ] && source $f; done
+for f in ~/.bash_profile.d/*; do [ -f "$f" ] && source "$f"; done
