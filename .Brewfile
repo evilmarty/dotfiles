@@ -31,7 +31,7 @@ cask "font-fira-mono-nerd-font"
 cask "1password"                 # Password manager
 cask "1password-cli"             # CLI for 1Password
 cask "firefox"                   # The ONE web browser to rule them all
-cask "iterm2"                    # Replacement terminal app
+cask "ghostty"                   # A better terminal app
 cask "qlmarkdown"                # Quickview markdown files
 cask "docker"
 
