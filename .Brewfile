@@ -1,5 +1,4 @@
 tap "homebrew/cask-fonts"
-tap "homebrew/cask"
 
 brew "coreutils"
 brew "gnu-sed"
@@ -8,6 +7,7 @@ brew "bash-completion"
 brew "git"
 brew "gh"                        # Replacement to hub
 brew "vim"                       # Don't use native vim
+brew "neovim"                    # Code editor of choice
 brew "tmux"
 brew "reattach-to-user-namespace" # Required to fix macos copy/paste in tmux
 brew "gpg"
