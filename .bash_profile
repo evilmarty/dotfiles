@@ -26,7 +26,11 @@ export PATH="${HOME}/bin:${PATH}:${HOME}/.local/bin"
 export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 export ERL_AFLAGS="-kernel shell_history enabled"
-export GPG_TTY=$(tty)
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+if hash tty 2>/dev/null; then
+  export GPG_TTY=$(tty)
+fi
 
 if [[ -n "${ZSH_VERSION-}" ]]; then
   export SHELL_NAME="zsh"
