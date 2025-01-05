@@ -2,4 +2,6 @@
 #
 # Initialize Starship prompt
 # ---------------------------------------
-hash starship 2>/dev/null && eval "$(starship init "${SHELL_NAME:-bash}")"
+if hash starship 2>/dev/null; then
+  eval "$(starship init "${SHELL_NAME:-bash}")"
+fi

@@ -2,16 +2,7 @@
 #
 # Setup fzf
 # ---------
-for path in /usr/local/opt/fzf /opt/homebrew/opt/fzf; do
-  if [ -d "$path" ]; then
-    FZF_PATH="$path"
-    break
-  fi
-done
-
-if [ ! -d "$FZF_PATH" ]; then
-  exit
-fi
+FZF_PATH=$(brew --prefix fzf)
 
 if [[ ! "$PATH" == *${FZF_PATH}/bin* ]]; then
   export PATH="$PATH:${FZF_PATH}/bin"
