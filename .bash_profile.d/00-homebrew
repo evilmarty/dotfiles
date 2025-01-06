@@ -3,22 +3,23 @@
 # Homebrew bash integration and overrides
 # ---------------------------------------
 
-BREW_BIN=""
+if [[ -z "${HOMEBREW_PREFIX:-}" ]]; then
+  BREW_BIN=""
+  for path in /opt/homebrew /usr/local; do
+    brew_bin="${path}/bin/brew"
+    if [ -x "$brew_bin" ]; then
+      BREW_BIN="$brew_bin"
+      break
+    fi
+  done
 
-for path in /opt/homebrew /usr/local; do
-  brew_bin="${path}/bin/brew"
-  if [ -x "$brew_bin" ]; then
-    BREW_BIN="$brew_bin"
-    break
+  if [[ ! -x "$BREW_BIN" ]]; then
+    echo "Homebrew not installed or not properly setup."
+    exit 1
   fi
-done
 
-if [[ ! -x "$BREW_BIN" ]]; then
-  echo "Homebrew not installed or not properly setup."
-  exit 1
+  eval $("$BREW_BIN" shellenv ${SHELL_NAME:-bash})
 fi
-
-eval $("$BREW_BIN" shellenv ${SHELL_NAME:-bash})
 
 GNUBIN_PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin"
 [[ -d "$GNUBIN_PATH" ]] && export PATH="${GNUBIN_PATH}:${PATH}"
