@@ -20,5 +20,8 @@ fi
 
 eval $("$BREW_BIN" shellenv ${SHELL_NAME:-bash})
 
+GNUBIN_PATH="${HOMEBREW_PREFIX}/opt/coreutils/libexec/gnubin"
+[[ -d "$GNUBIN_PATH" ]] && export PATH="${GNUBIN_PATH}:${PATH}"
+
 SHELL_COMPLETION_PATH="${HOMEBREW_PREFIX}/etc/profile.d/${SHELL_NAME:-bash}_completion.sh"
 [[ -r "$SHELL_COMPLETION_PATH" ]] && source "$SHELL_COMPLETION_PATH"
