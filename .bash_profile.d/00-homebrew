@@ -2,12 +2,23 @@
 #
 # Homebrew bash integration and overrides
 # ---------------------------------------
-if ! hash brew 2>/dev/null; then
-  echo "Homebrew not installed or not in PATH."
+
+BREW_BIN=""
+
+for path in /opt/homebrew /usr/local; do
+  brew_bin="${path}/bin/brew"
+  if [ -x "$brew_bin" ]; then
+    BREW_BIN="$brew_bin"
+    break
+  fi
+done
+
+if [[ ! -x "$BREW_BIN" ]]; then
+  echo "Homebrew not installed or not properly setup."
   exit 1
 fi
 
-HOMEBREW_PATH="$(brew --prefix)"
+eval $("$BREW_BIN" shellenv ${SHELL_NAME:-bash})
 
-SHELL_COMPLETION_PATH="${HOMEBREW_PATH}/etc/profile.d/${SHELL_NAME:-bash}_completion.sh"
+SHELL_COMPLETION_PATH="${HOMEBREW_PREFIX}/etc/profile.d/${SHELL_NAME:-bash}_completion.sh"
 [[ -r "$SHELL_COMPLETION_PATH" ]] && source "$SHELL_COMPLETION_PATH"
