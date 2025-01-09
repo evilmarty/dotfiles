@@ -41,7 +41,6 @@ cask "1password-cli"             # CLI for 1Password
 cask "firefox"                   # The ONE web browser to rule them all
 cask "ghostty"                   # A better terminal app
 cask "qlmarkdown"                # Quickview markdown files
-cask "docker"
 
 mas "Xcode", id: 497799835
 mas "Hush Nag Blocker", id: 1544743900
