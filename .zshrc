@@ -8,7 +8,6 @@ if type brew &>/dev/null; then
 
   try_source "${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
   try_source "${BREW_PREFIX}/share/zsh-autopair/autopair.zsh"
-  try_source "${BREW_PREFIX}/share/zsh-system-clipboard/zsh-system-clipboard.zsh"
   try_source "${BREW_PREFIX}/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
   try_source "${BREW_PREFIX}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
 

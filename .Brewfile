@@ -24,6 +24,14 @@ brew "starship"                  # Terminal prompt
 brew "direnv"
 brew "zoxide"                    # Better cd
 
+# zsh shell and plugins
+brew "zsh"
+brew "zsh-autocomplete"
+brew "zsh-autopair"
+brew "zsh-autosuggestions"
+brew "zsh-completions"
+brew "zsh-fast-syntax-highlighting"
+
 # Terminal font with nerdfont support
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
