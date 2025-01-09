@@ -27,6 +27,8 @@ export CLICOLOR=1
 export LSCOLORS=ExGxBxDxCxEgEdxbxgxcxd
 export ERL_AFLAGS="-kernel shell_history enabled"
 export BASH_SILENCE_DEPRECATION_WARNING=1
+export HOMEBREW_BAT="true" # Use bat in Homebrew
+export XDG_CONFIG_HOME="${HOME}/.config"
 
 if hash tty 2>/dev/null; then
   export GPG_TTY=$(tty)
