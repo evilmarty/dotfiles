@@ -31,7 +31,8 @@ export HOMEBREW_BAT="true" # Use bat in Homebrew
 export XDG_CONFIG_HOME="${HOME}/.config"
 
 if hash tty 2>/dev/null; then
-  export GPG_TTY=$(tty)
+  GPG_TTY=$(tty)
+  export GPG_TTY
 fi
 
 if [[ -n "${ZSH_VERSION-}" ]]; then
@@ -43,4 +44,5 @@ else
 fi
 
 # Source all shell files
+# shellcheck source=/dev/null
 for f in ~/.bash_profile.d/*; do [ -f "$f" ] && source "$f"; done
