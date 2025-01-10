@@ -102,10 +102,12 @@
 [merge]
   conflictstyle = zdiff3
   keepbackup = false
+  tool = nvimdiff
   guitool = opendiff
 
 [mergetool]
   prompt = false
+  tool = nvimdiff
 
 [push]
   default = current
@@ -131,7 +133,7 @@
 
 [delta]
   features = decorations
-  colorMoved = default
+  navigate = true
 
 [delta "interactive"]
   keep-plus-minus-markers = false
