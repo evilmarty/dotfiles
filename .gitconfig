@@ -4,7 +4,8 @@
   br = branch
   c = commit -pv
   cm = commit -m
-  co = checkout
+  co = switch
+  r = restore --staged
   cont = rebase --continue
   contains = branch --contains
   cp = cherry-pick
