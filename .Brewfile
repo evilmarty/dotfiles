@@ -23,6 +23,7 @@ brew "git-delta"                 # Better git pager
 brew "starship"                  # Terminal prompt
 brew "direnv"
 brew "zoxide"                    # Better cd
+brew "syntax-highlight"          # Quickview code files
 
 # zsh shell and plugins
 brew "zsh"
@@ -38,6 +39,7 @@ cask "font-fira-mono-nerd-font"
 
 cask "1password"                 # Password manager
 cask "1password-cli"             # CLI for 1Password
+cask "appcleaner"                # macOS Uninstaller
 cask "firefox"                   # The ONE web browser to rule them all
 cask "ghostty"                   # A better terminal app
 cask "qlmarkdown"                # Quickview markdown files
