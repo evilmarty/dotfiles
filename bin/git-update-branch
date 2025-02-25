@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
-DEFAULT_BRANCH=`git config --default master --get init.defaultbranch`
+DEFAULT_BRANCH=$(git config --default master --get init.defaultbranch)
 BRANCH="${1:-$DEFAULT_BRANCH}"
 
-git stash
+if [[ $(git stash push -m 'stashing to update branch') == "No local changes to save" ]]; then
+  STASHED="1"
+fi
+
 git checkout "$BRANCH"
 git pull origin "$BRANCH"
 git checkout -
 git rebase "$BRANCH"
-git stash pop
+
+if [[ -n "${STASHED:-}" ]]; then
+  git stash pop
+fi
