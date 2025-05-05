@@ -23,7 +23,7 @@
   pop = stash pop
   drop = stash drop
   pr = "!gh pr create $(for label in $(git config --get-all pr.label.name); do echo --label $label; done)"
-  ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; local s=\"$(git stash push)\"; git checkout \"$b\"; git pull origin \"$b\"; [ \"$s\" != \"No local changes to save\" ] && git stash pop; }; f"
+  ready = "!f() { local b=\"${1:-`git config --default main --get init.defaultbranch`}\"; git checkout \"$b\"; git pull --autostash origin \"$b\"; }; f"
   root = rev-parse --show-toplevel
   s = status
   squash = rebase --autosquash -i
