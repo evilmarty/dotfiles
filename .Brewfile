@@ -1,5 +1,3 @@
-tap "homebrew/cask-fonts"
-
 brew "coreutils"
 brew "gnu-sed"
 brew "bash"                      # Use latest bash
