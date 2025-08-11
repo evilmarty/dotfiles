@@ -1,0 +1,6 @@
+# vi:syntax=sh
+#
+# 1Password shell integration
+# ------------------------
+OP_PLUGINS="${HOME}/.config/op/plugins.sh"
+hash op 2>/dev/null && [[ -f "$OP_PLUGINS" ]] && source "$OP_PLUGINS"
