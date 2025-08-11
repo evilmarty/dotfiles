@@ -2,4 +2,5 @@ theme = "Dracula+"
 background-opacity = 0.9
 background-blur-radius = 15
 unfocused-split-opacity = 0.8
-window-inherit-working-directory = false
+working-directory = "home"
+window-inherit-working-directory = true
