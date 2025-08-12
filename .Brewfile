@@ -41,6 +41,9 @@ cask "appcleaner"                # macOS Uninstaller
 cask "firefox"                   # The ONE web browser to rule them all
 cask "ghostty"                   # A better terminal app
 cask "qlmarkdown"                # Quickview markdown files
+cask "display-pilot"             # BenQ monitor utility
+cask "logi-options+"             # Logitech keyboard and mouse management
+cask "imazing"                   # iPhone management
 
 mas "Xcode", id: 497799835
 mas "Hush Nag Blocker", id: 1544743900
@@ -53,3 +56,4 @@ mas "Keynote", id: 409183694
 mas "Noir - Dark Mode for Safari", id: 1592917505
 mas "1Password for Safari", id: 1569813296
 mas "Userscripts", id: 1463298887
+mas "Home Assistant", id: 1099568401
