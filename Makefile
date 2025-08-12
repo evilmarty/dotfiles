@@ -5,11 +5,11 @@ HOMEBREW=$(shell which brew)
 .PHONY: home install update homebrew
 
 homebrew:
-ifndef $(HOMEBREW)
-  bash -c "$$(curl -fsSL $(HOMEBREW_INSTALL_URL))"
+ifndef HOMEBREW
+	bash -c "$$(curl -fsSL $(HOMEBREW_INSTALL_URL))"
 endif
-	brew tap-info homebrew/bundle 2> /dev/null || brew tap homebrew/bundle
-	brew bundle --file .Brewfile
+	$(HOMEBREW) tap-info homebrew/bundle 2> /dev/null || $(HOMEBREW) tap homebrew/bundle
+	$(HOMEBREW) bundle --file .Brewfile
 
 install: homebrew
 
