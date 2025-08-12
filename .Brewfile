@@ -21,7 +21,6 @@ brew "git-delta"                 # Better git pager
 brew "starship"                  # Terminal prompt
 brew "direnv"
 brew "zoxide"                    # Better cd
-brew "syntax-highlight"          # Quickview code files
 
 # zsh shell and plugins
 brew "zsh"
@@ -35,6 +34,7 @@ brew "zsh-fast-syntax-highlighting"
 cask "font-fira-code-nerd-font"
 cask "font-fira-mono-nerd-font"
 
+cask "syntax-highlight"          # Quickview code files
 cask "1password"                 # Password manager
 cask "1password-cli"             # CLI for 1Password
 cask "appcleaner"                # macOS Uninstaller
@@ -44,7 +44,7 @@ cask "qlmarkdown"                # Quickview markdown files
 
 mas "Xcode", id: 497799835
 mas "Hush Nag Blocker", id: 1544743900
-mas "DuckDuckGo Privacy Essentials", id: 1482920575
+mas "DuckDuckGo Privacy Essentials", id: 663592361
 mas "NextDNS", id: 1464122853
 mas "PiPifier - PiP for nearly every video", id: 1160374471
 mas "Numbers", id: 409203825
