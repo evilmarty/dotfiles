@@ -21,6 +21,7 @@ brew "git-delta"                 # Better git pager
 brew "starship"                  # Terminal prompt
 brew "direnv"
 brew "zoxide"                    # Better cd
+brew "gemini-cli"                # Google's coding model
 
 # zsh shell and plugins
 brew "zsh"
@@ -44,6 +45,9 @@ cask "qlmarkdown"                # Quickview markdown files
 cask "display-pilot"             # BenQ monitor utility
 cask "logi-options+"             # Logitech keyboard and mouse management
 cask "imazing"                   # iPhone management
+cask "ollama-app"                # Run AI models locally
+cask "claude"                    # Claude AI
+cask "chatgpt"                   # ChatGPT
 
 mas "Xcode", id: 497799835
 mas "Hush Nag Blocker", id: 1544743900
