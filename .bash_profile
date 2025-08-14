@@ -1,21 +1,3 @@
-# Aliases
-alias cat='bat'
-alias ls='eza --git'
-alias ll='eza -la --git'
-alias tree='tree -C'
-alias ssh-stop='ssh -O stop'
-alias sssh='ssh -o "UserKnownHostsFile /dev/null" -o "StrictHostKeyChecking no"'
-alias nv='nvim'
-alias vim='nvim'
-alias gitl='git log'
-alias gits='git status'
-alias gitc='git commit'
-alias gitp='git pull'
-alias dc='docker-compose'
-alias git-home='cd $(git rev-parse --show-toplevel)'
-alias cpv='rsync -ah --info=progress2'
-alias sizeof='du --human-readable --summarize'
-
 function rgf {
   rg --files "${@:2}" | rg "$1"
 }
@@ -42,6 +24,8 @@ elif [[ -n "${BASH_VERSION-}" ]]; then
 else
   export SHELL_NAME="${SHELL##*/}"
 fi
+
+source "${HOME}/.aliases"
 
 # Source all shell files
 # shellcheck source=/dev/null
