@@ -1,4 +1,5 @@
 HOMEBREW_INSTALL_URL="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh"
+OHMYZSH_INSTALL_URL="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
 CONFIG_PATH=$(HOME)/.config
 HOMEBREW=$(shell which brew)
 
@@ -6,12 +7,19 @@ HOMEBREW=$(shell which brew)
 
 homebrew:
 ifndef HOMEBREW
-	bash -c "$$(curl -fsSL $(HOMEBREW_INSTALL_URL))"
+	sh -c "$$(curl -fsSL $(HOMEBREW_INSTALL_URL))"
 endif
 	$(HOMEBREW) tap-info homebrew/bundle 2> /dev/null || $(HOMEBREW) tap homebrew/bundle
 	$(HOMEBREW) bundle --file .Brewfile
 
-install: homebrew
+ohmyzsh:
+ifndef ZSH
+	sh -c "$$(curl -fsSL $(OHMYZSH_INSTALL_URL))"
+else
+	@echo "ZSH is already installed at $(ZSH)"
+endif
+
+install: homebrew ohmyezsh
 
 update: homebrew
 

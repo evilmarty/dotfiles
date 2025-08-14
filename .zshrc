@@ -1,19 +1,49 @@
-try_source() {
-  [[ -r "$1" ]] && source "$1"
-}
+export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="risto"
 
-if type brew &>/dev/null; then
-  BREW_PREFIX=$(brew --prefix)
-  FPATH="${BREW_PREFIX}/share/zsh-completions:${FPATH}"
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
 
-  try_source "${BREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-  try_source "${BREW_PREFIX}/share/zsh-autopair/autopair.zsh"
-  try_source "${BREW_PREFIX}/opt/zsh-fast-syntax-highlighting/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh"
-  try_source "${BREW_PREFIX}/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh"
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
 
-  # Don't load compinit if loading zsh-autocomplete
-  # autoload -Uz compinit
-  # compinit
+# Uncomment one of the following lines to change the auto-update behavior
+# zstyle ':omz:update' mode disabled  # disable automatic updates
+# zstyle ':omz:update' mode auto      # update automatically without asking
+# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
+
+# Uncomment the following line to change how often to auto-update (in days).
+# zstyle ':omz:update' frequency 13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+plugins=(1password direnv fzf git mix starship zoxide)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+export ERL_AFLAGS="-kernel shell_history enabled"
+export HOMEBREW_BAT="true" # Use bat in Homebrew
+export XDG_CONFIG_HOME="${HOME}/.config"
+
+eval $(brew shellenv)
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
 fi
 
-source ~/.bash_profile
+# Compilation flags
+# export ARCHFLAGS="-arch $(uname -m)"
+
+source "$HOME/.aliases"
+[[ -f "${XDG_CONFIG_HOME}/op/plugins.sh" ]] && source "${XDG_CONFIG_HOME}/op/plugins.sh"

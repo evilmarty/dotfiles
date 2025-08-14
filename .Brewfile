@@ -22,14 +22,7 @@ brew "starship"                  # Terminal prompt
 brew "direnv"
 brew "zoxide"                    # Better cd
 brew "gemini-cli"                # Google's coding model
-
-# zsh shell and plugins
-brew "zsh"
-brew "zsh-autocomplete"
-brew "zsh-autopair"
-brew "zsh-autosuggestions"
-brew "zsh-completions"
-brew "zsh-fast-syntax-highlighting"
+brew "zsh"                       # Use latest zsh
 
 # Terminal font with nerdfont support
 cask "font-fira-code-nerd-font"
