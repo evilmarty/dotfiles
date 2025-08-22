@@ -13,7 +13,7 @@ endif
 	$(HOMEBREW) bundle --file .Brewfile
 
 ohmyzsh:
-ifndef ZSH
+ifeq ($(origin ZSH),undefined)
 	sh -c "$$(curl -fsSL $(OHMYZSH_INSTALL_URL))"
 else
 	@echo "ZSH is already installed at $(ZSH)"
