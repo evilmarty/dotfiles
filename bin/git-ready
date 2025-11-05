@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-DEFAULT_BRANCH=$(git config --default master --get init.defaultbranch)
-BRANCH="${1:-$DEFAULT_BRANCH}"
+BRANCH="${1:-$(git config --default master --get init.defaultbranch)}"
 
 git checkout "$BRANCH"
-git pull --autostash origin
+git pull --autostash origin "$BRANCH"
 git-prune-branches
