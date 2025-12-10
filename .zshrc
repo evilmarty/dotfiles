@@ -23,7 +23,7 @@ ZSH_THEME="risto"
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-plugins=(1password direnv fzf git mix starship zoxide)
+plugins=(1password brew direnv fzf git mix starship zoxide)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -32,8 +32,6 @@ source $ZSH/oh-my-zsh.sh
 export ERL_AFLAGS="-kernel shell_history enabled"
 export HOMEBREW_BAT="true" # Use bat in Homebrew
 export XDG_CONFIG_HOME="${HOME}/.config"
-
-eval $(brew shellenv)
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
