@@ -2,8 +2,9 @@ HOMEBREW_INSTALL_URL="https://raw.githubusercontent.com/Homebrew/install/HEAD/in
 OHMYZSH_INSTALL_URL="https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh"
 CONFIG_PATH=$(HOME)/.config
 HOMEBREW=$(shell which brew)
+REPO_DIR=$(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
-.PHONY: home install update homebrew
+.PHONY: home install update homebrew ohmyzsh gitconfig
 
 homebrew:
 ifndef HOMEBREW
@@ -19,7 +20,7 @@ else
 	@echo "ZSH is already installed at $(ZSH)"
 endif
 
-install: homebrew ohmyezsh
+install: homebrew gitconfig ohmyezsh
 
 update: homebrew
 
@@ -27,3 +28,6 @@ home:
 	git ls-files | xargs -n 1 dirname | sort -u | xargs -I % -n 1 mkdir -p $(HOME)/%
 	git ls-files | xargs -n 1 -I % cp -f % $(HOME)/%
 	cp -fR .git $(HOME)
+
+gitconfig:
+	git config set --global --path include.path "$(REPO_DIR)/.gitconfig_global"

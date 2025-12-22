@@ -160,5 +160,3 @@
   whitespace-error-style = reverse red
   zero-style = dim syntax
 
-[include]
-  path = ~/.gitconfig_local
