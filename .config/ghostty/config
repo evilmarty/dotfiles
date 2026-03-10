@@ -4,4 +4,5 @@ background-blur-radius = 15
 unfocused-split-opacity = 0.8
 working-directory = "home"
 window-inherit-working-directory = false
-tab-inherit-working-directory = true
+tab-inherit-working-directory = false
+split-inherit-working-directory = true
