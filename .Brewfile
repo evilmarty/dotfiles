@@ -24,6 +24,7 @@ brew "zoxide"                    # Better cd
 brew "gemini-cli"                # Google's coding model
 brew "zsh"                       # Use latest zsh
 brew "container"                 # Run linux containers on macOS using VMs
+brew "mole"                      # Deep clean and optimize your Mac
 
 # Terminal font with nerdfont support
 cask "font-fira-code-nerd-font"
