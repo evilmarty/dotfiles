@@ -1,0 +1,199 @@
+#!/usr/bin/env bash
+# git-commit-copilot.sh
+# Auto-generates a commit message using the GitHub Copilot API (via the token
+# stored by the neovim copilot plugin), pre-populates neovim for review, then commits.
+#
+# Usage:
+#   ./git-commit-copilot.sh                  # commit staged changes
+#   ./git-commit-copilot.sh --no-verify      # skip pre-commit hooks
+#   ./git-commit-copilot.sh --dry-run        # print generated message, don't commit
+#
+# Dependencies: curl, jq, nvim
+# The Copilot OAuth token is read from ~/.config/github-copilot/hosts.json
+# (written automatically by copilot.vim / copilot.lua).
+
+set -euo pipefail
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+EDITOR="${EDITOR:-nvim}"
+COPILOT_HOSTS_FILE="${COPILOT_HOSTS_FILE:-$HOME/.config/github-copilot/hosts.json}"
+COPILOT_APPS_FILE="${COPILOT_APPS_FILE:-$HOME/.config/github-copilot/apps.json}"
+COPILOT_TOKEN_API="https://api.github.com/copilot_internal/v2/token"
+COPILOT_CHAT_API="https://api.githubcopilot.com/chat/completions"
+# Max lines of diff sent to Copilot (keeps the prompt lean)
+MAX_DIFF_LINES=300
+
+# ── Argument parsing ──────────────────────────────────────────────────────────
+
+GIT_FLAGS=()
+DRY_RUN=false
+
+for arg in "$@"; do
+  case "$arg" in
+  --dry-run) DRY_RUN=true ;;
+  *) GIT_FLAGS+=("$arg") ;;
+  esac
+done
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+die() {
+  echo "❌  $*" >&2
+  exit 1
+}
+info() { echo "ℹ️  $*"; }
+ok() { echo "✅  $*"; }
+
+require() {
+  command -v "$1" &>/dev/null || die "'$1' is required but not found in PATH."
+}
+
+require curl
+require jq
+require nvim
+
+# ── Check for staged changes ──────────────────────────────────────────────────
+
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+  die "Not inside a git repository."
+fi
+
+if git diff --cached --quiet; then
+  die "No staged changes found. Stage some files first (git add ...)."
+fi
+
+# ── Resolve Copilot OAuth token ───────────────────────────────────────────────
+
+get_oauth_token() {
+  local file
+  for file in "$COPILOT_HOSTS_FILE" "$COPILOT_APPS_FILE"; do
+    if [[ -f "$file" ]]; then
+      local token
+      token=$(jq -r 'to_entries[0].value.oauth_token // empty' "$file" 2>/dev/null)
+      if [[ -n "$token" ]]; then
+        echo "$token"
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+OAUTH_TOKEN=$(get_oauth_token) ||
+  die "Could not find a Copilot OAuth token.\n  Checked:\n    $COPILOT_HOSTS_FILE\n    $COPILOT_APPS_FILE\n  Make sure the copilot plugin is authenticated (:Copilot auth)."
+
+# ── Exchange OAuth token for a short-lived Copilot API token ─────────────────
+
+info "Authenticating with Copilot API…"
+
+api_token_response=$(curl -sf \
+  -H "Authorization: token $OAUTH_TOKEN" \
+  -H "Editor-Version: Neovim/0.10.0" \
+  -H "Copilot-Integration-Id: neovim.nvim" \
+  "$COPILOT_TOKEN_API") ||
+  die "Failed to reach Copilot token endpoint. Check your internet connection."
+
+COPILOT_API_TOKEN=$(echo "$api_token_response" | jq -r '.token // empty') ||
+  die "Unexpected response from Copilot token API."
+
+[[ -n "$COPILOT_API_TOKEN" ]] ||
+  die "Empty API token returned. Your OAuth token may be expired — re-authenticate with :Copilot auth."
+
+# ── Build the prompt from the staged diff ────────────────────────────────────
+
+DIFF=$(git diff --cached | head -n "$MAX_DIFF_LINES")
+STAT=$(git diff --cached --stat)
+
+PROMPT=$(
+  cat <<PROMPT
+You are an expert software engineer writing a git commit message.
+
+Analyse the following staged diff and produce a commit message that:
+- Follows the Conventional Commits spec (feat/fix/chore/refactor/docs/test/ci/build/perf/style)
+- Has a concise subject line (imperative mood, ≤ 72 characters, no trailing period)
+- Optionally includes a blank line followed by a short body (max 3 bullet points) if the change warrants explanation
+- Does NOT include any preamble, explanation, or markdown fencing — output the commit message only
+
+--- git diff --stat ---
+$STAT
+
+--- git diff --cached ---
+$DIFF
+PROMPT
+)
+
+# ── Call Copilot Chat completions ─────────────────────────────────────────────
+
+info "Generating commit message…"
+
+payload=$(jq -n \
+  --arg prompt "$PROMPT" \
+  '{
+        model: "gpt-4o",
+        max_tokens: 256,
+        temperature: 0.2,
+        messages: [{ role: "user", content: $prompt }]
+    }')
+
+completion_response=$(curl -sf \
+  -X POST \
+  -H "Authorization: Bearer $COPILOT_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Editor-Version: Neovim/0.10.0" \
+  -H "Copilot-Integration-Id: neovim.nvim" \
+  -d "$payload" \
+  "$COPILOT_CHAT_API") ||
+  die "Copilot Chat API request failed."
+
+GENERATED_MSG=$(echo "$completion_response" |
+  jq -r '.choices[0].message.content // empty' |
+  sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+if [[ -z "$GENERATED_MSG" ]]; then
+  info "Copilot returned an empty message — falling back to standard git commit."
+  exec git commit "${GIT_FLAGS[@]}"
+fi
+
+# ── Dry-run: just print and exit ──────────────────────────────────────────────
+
+if $DRY_RUN; then
+  echo ""
+  echo "── Generated commit message ─────────────────────────────────────────"
+  echo "$GENERATED_MSG"
+  echo "─────────────────────────────────────────────────────────────────────"
+  exit 0
+fi
+
+# ── Write temp file and open in neovim for review ────────────────────────────
+
+TMPFILE=$(mktemp "${TMPDIR:-/tmp}/git-commit-msg-XXXXXX")
+trap 'rm -f "$TMPFILE"' EXIT
+
+cat >"$TMPFILE" <<EOF
+$GENERATED_MSG
+
+# ── Copilot-generated commit message ──────────────────────────────────────
+# Review and edit above, then :wq to commit.  Wipe all non-comment lines to abort.
+#
+# Changes to be committed:
+$(git diff --cached --stat | sed 's/^/#   /')
+#
+# To regenerate: re-run $0
+EOF
+
+$EDITOR "$TMPFILE"
+
+# ── Extract final message (strip comment lines and trim blank lines) ──────────
+
+FINAL_MSG=$(grep -v '^#' "$TMPFILE" | sed '/^[[:space:]]*$/d')
+
+if [[ -z "$FINAL_MSG" ]]; then
+  info "Empty commit message — aborting."
+  exit 1
+fi
+
+# ── Commit ────────────────────────────────────────────────────────────────────
+
+git commit -m "$FINAL_MSG" "${GIT_FLAGS[@]}"
+ok "Committed: $(git log -1 --oneline)"
