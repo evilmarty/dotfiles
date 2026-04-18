@@ -44,6 +44,7 @@ cask "imazing"                   # iPhone management
 cask "ollama-app"                # Run AI models locally
 cask "claude"                    # Claude AI
 cask "chatgpt"                   # ChatGPT
+cask "google-gemini"
 
 mas "Xcode", id: 497799835
 mas "Hush Nag Blocker", id: 1544743900
