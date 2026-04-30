@@ -20,7 +20,7 @@ EDITOR="${EDITOR:-nvim}"
 COPILOT_HOSTS_FILE="${COPILOT_HOSTS_FILE:-$HOME/.config/github-copilot/hosts.json}"
 COPILOT_APPS_FILE="${COPILOT_APPS_FILE:-$HOME/.config/github-copilot/apps.json}"
 COPILOT_TOKEN_API="https://api.github.com/copilot_internal/v2/token"
-COPILOT_CHAT_API="https://api.githubcopilot.com/chat/completions"
+COPILOT_CHAT_API_DEFAULT="https://api.githubcopilot.com"
 # Max lines of diff sent to Copilot (keeps the prompt lean)
 MAX_DIFF_LINES=300
 
@@ -90,7 +90,7 @@ info "Authenticating with Copilot API…"
 api_token_response=$(curl -sf \
   -H "Authorization: token $OAUTH_TOKEN" \
   -H "Editor-Version: Neovim/0.10.0" \
-  -H "Copilot-Integration-Id: neovim.nvim" \
+  -H "Copilot-Integration-Id: copilot-chat" \
   "$COPILOT_TOKEN_API") ||
   die "Failed to reach Copilot token endpoint. Check your internet connection."
 
@@ -99,6 +99,9 @@ COPILOT_API_TOKEN=$(echo "$api_token_response" | jq -r '.token // empty') ||
 
 [[ -n "$COPILOT_API_TOKEN" ]] ||
   die "Empty API token returned. Your OAuth token may be expired — re-authenticate with :Copilot auth."
+
+# Use the endpoint advertised by the token API (Copilot for Business uses a different host)
+COPILOT_CHAT_API=$(echo "$api_token_response" | jq -r --arg default "$COPILOT_CHAT_API_DEFAULT" '.endpoints.api // $default')/chat/completions
 
 # ── Build the prompt from the staged diff ────────────────────────────────────
 
@@ -141,7 +144,7 @@ completion_response=$(curl -sf \
   -H "Authorization: Bearer $COPILOT_API_TOKEN" \
   -H "Content-Type: application/json" \
   -H "Editor-Version: Neovim/0.10.0" \
-  -H "Copilot-Integration-Id: neovim.nvim" \
+  -H "Copilot-Integration-Id: copilot-chat" \
   -d "$payload" \
   "$COPILOT_CHAT_API") ||
   die "Copilot Chat API request failed."
