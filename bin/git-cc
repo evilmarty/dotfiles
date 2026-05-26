@@ -105,7 +105,7 @@ COPILOT_CHAT_API=$(echo "$api_token_response" | jq -r --arg default "$COPILOT_CH
 
 # ── Build the prompt from the staged diff ────────────────────────────────────
 
-DIFF=$(git diff --cached | head -n "$MAX_DIFF_LINES")
+DIFF=$(git diff --cached | head -n "$MAX_DIFF_LINES" || [ "${PIPESTATUS[0]}" -eq 141 ])
 STAT=$(git diff --cached --stat)
 
 PROMPT=$(
