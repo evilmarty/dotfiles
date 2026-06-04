@@ -3,11 +3,6 @@
 # Auto-generates a commit message using the GitHub Copilot API (via the token
 # stored by the neovim copilot plugin), pre-populates neovim for review, then commits.
 #
-# Usage:
-#   ./git-commit-copilot.sh                  # commit staged changes
-#   ./git-commit-copilot.sh --no-verify      # skip pre-commit hooks
-#   ./git-commit-copilot.sh --dry-run        # print generated message, don't commit
-#
 # Dependencies: curl, jq, nvim
 # The Copilot OAuth token is read from ~/.config/github-copilot/hosts.json
 # (written automatically by copilot.vim / copilot.lua).
@@ -26,12 +21,32 @@ MAX_DIFF_LINES=300
 
 # ── Argument parsing ──────────────────────────────────────────────────────────
 
+usage() {
+  cat <<EOF
+Usage: git cc [options] [git-commit-flags]
+
+Auto-generates a commit message using the GitHub Copilot API, pre-populates
+neovim for review, then commits.
+
+Options:
+  -p, --patch     Interactively stage hunks via git add -p before committing
+  --dry-run       Print the generated message without committing
+  --no-verify     Skip pre-commit hooks (passed through to git commit)
+  --help          Show this help message
+
+Any unrecognised flags are passed directly to git commit.
+EOF
+}
+
 GIT_FLAGS=()
 DRY_RUN=false
+PATCH=false
 
 for arg in "$@"; do
   case "$arg" in
+  --help) usage; exit 0 ;;
   --dry-run) DRY_RUN=true ;;
+  -p | --patch) PATCH=true ;;
   *) GIT_FLAGS+=("$arg") ;;
   esac
 done
@@ -57,6 +72,10 @@ require nvim
 
 if ! git rev-parse --is-inside-work-tree &>/dev/null; then
   die "Not inside a git repository."
+fi
+
+if $PATCH; then
+  git add -p
 fi
 
 if git diff --cached --quiet; then
