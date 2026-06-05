@@ -1,0 +1,262 @@
+#!/usr/bin/env bash
+# git-pr
+# Auto-generates a pull request title and description using the GitHub Copilot
+# API, pre-populates $EDITOR for review, then creates the PR via gh.
+#
+# Dependencies: curl, jq, gh, nvim (or $EDITOR)
+# The Copilot OAuth token is read from ~/.config/github-copilot/hosts.json
+# (written automatically by copilot.vim / copilot.lua).
+
+set -euo pipefail
+
+# ── Config ────────────────────────────────────────────────────────────────────
+
+EDITOR="${EDITOR:-nvim}"
+COPILOT_HOSTS_FILE="${COPILOT_HOSTS_FILE:-$HOME/.config/github-copilot/hosts.json}"
+COPILOT_APPS_FILE="${COPILOT_APPS_FILE:-$HOME/.config/github-copilot/apps.json}"
+COPILOT_TOKEN_API="https://api.github.com/copilot_internal/v2/token"
+COPILOT_CHAT_API_DEFAULT="https://api.githubcopilot.com"
+# Max lines of diff sent to Copilot (keeps the prompt lean)
+MAX_DIFF_LINES=500
+
+# ── Argument parsing ──────────────────────────────────────────────────────────
+
+usage() {
+  cat <<EOF
+Usage: git pr [options]
+
+Auto-generates a pull request title and description using the GitHub Copilot
+API, pre-populates \$EDITOR for review, then creates the PR via gh.
+
+Options:
+  --base <branch>   Base branch for the PR (default: auto-detected main/master)
+  --draft           Create a draft pull request
+  --push            Push the current branch to origin before creating the PR
+  --dry-run         Print the generated PR without creating it
+  --help            Show this help message
+
+Any unrecognised flags are passed directly to gh pr create.
+EOF
+}
+
+GH_FLAGS=()
+DRY_RUN=false
+PUSH=false
+BASE_BRANCH=""
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --help) usage; exit 0 ;;
+  --dry-run) DRY_RUN=true ;;
+  --draft) GH_FLAGS+=("--draft") ;;
+  --push) PUSH=true ;;
+  --base)
+    [[ $# -gt 1 ]] || { echo "❌  --base requires an argument" >&2; exit 1; }
+    BASE_BRANCH="$2"
+    shift
+    ;;
+  *) GH_FLAGS+=("$1") ;;
+  esac
+  shift
+done
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+die() {
+  echo "❌  $*" >&2
+  exit 1
+}
+info() { echo "ℹ️  $*"; }
+ok() { echo "✅  $*"; }
+
+require() {
+  command -v "$1" &>/dev/null || die "'$1' is required but not found in PATH."
+}
+
+require curl
+require jq
+require gh
+
+# ── Check git state ───────────────────────────────────────────────────────────
+
+if ! git rev-parse --is-inside-work-tree &>/dev/null; then
+  die "Not inside a git repository."
+fi
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+[[ "$CURRENT_BRANCH" != "HEAD" ]] || die "Detached HEAD state — check out a branch first."
+
+# Auto-detect base branch
+if [[ -z "$BASE_BRANCH" ]]; then
+  BASE_BRANCH=$(git config get --default main init.defaultBranch)
+fi
+
+[[ "$CURRENT_BRANCH" != "$BASE_BRANCH" ]] ||
+  die "Already on '$BASE_BRANCH'. Check out a feature branch first."
+
+# ── Optionally push ───────────────────────────────────────────────────────────
+
+if $PUSH; then
+  info "Pushing '$CURRENT_BRANCH' to origin…"
+  git push -u origin "$CURRENT_BRANCH"
+fi
+
+# ── Gather context ────────────────────────────────────────────────────────────
+
+COMMIT_LOG=$(git log --oneline "$BASE_BRANCH..HEAD" 2>/dev/null) ||
+  die "Could not compute commit log between '$BASE_BRANCH' and '$CURRENT_BRANCH'."
+[[ -n "$COMMIT_LOG" ]] ||
+  die "No commits found between '$BASE_BRANCH' and '$CURRENT_BRANCH'."
+
+DIFF_STAT=$(git diff --stat "$BASE_BRANCH...HEAD")
+DIFF=$(git diff "$BASE_BRANCH...HEAD" | head -n "$MAX_DIFF_LINES" || [ "${PIPESTATUS[0]}" -eq 141 ])
+
+# ── Resolve Copilot OAuth token ───────────────────────────────────────────────
+
+get_oauth_token() {
+  local file
+  for file in "$COPILOT_HOSTS_FILE" "$COPILOT_APPS_FILE"; do
+    if [[ -f "$file" ]]; then
+      local token
+      token=$(jq -r 'to_entries[0].value.oauth_token // empty' "$file" 2>/dev/null)
+      if [[ -n "$token" ]]; then
+        echo "$token"
+        return 0
+      fi
+    fi
+  done
+  return 1
+}
+
+OAUTH_TOKEN=$(get_oauth_token) ||
+  die "Could not find a Copilot OAuth token.\n  Checked:\n    $COPILOT_HOSTS_FILE\n    $COPILOT_APPS_FILE\n  Make sure the copilot plugin is authenticated (:Copilot auth)."
+
+# ── Exchange OAuth token for a short-lived Copilot API token ─────────────────
+
+info "Authenticating with Copilot API…"
+
+api_token_response=$(curl -sf \
+  -H "Authorization: token $OAUTH_TOKEN" \
+  -H "Editor-Version: Neovim/0.10.0" \
+  -H "Copilot-Integration-Id: copilot-chat" \
+  "$COPILOT_TOKEN_API") ||
+  die "Failed to reach Copilot token endpoint. Check your internet connection."
+
+COPILOT_API_TOKEN=$(echo "$api_token_response" | jq -r '.token // empty') ||
+  die "Unexpected response from Copilot token API."
+
+[[ -n "$COPILOT_API_TOKEN" ]] ||
+  die "Empty API token returned. Your OAuth token may be expired — re-authenticate with :Copilot auth."
+
+COPILOT_CHAT_API=$(echo "$api_token_response" | jq -r --arg default "$COPILOT_CHAT_API_DEFAULT" '.endpoints.api // $default')/chat/completions
+
+# ── Build the prompt ──────────────────────────────────────────────────────────
+
+PROMPT=$(
+  cat <<PROMPT
+You are an expert software engineer writing a GitHub pull request.
+
+Analyse the following branch context and produce a pull request title and description that:
+- Title: concise, imperative mood, ≤ 72 characters, no trailing period
+- Description: markdown body with a brief summary paragraph; add a "## Changes" bullet list only if there are multiple distinct changes worth calling out
+- Does NOT include any preamble, explanation, or markdown fencing
+- Output format: first line is the PR title, then a blank line, then the description body
+
+Branch: $CURRENT_BRANCH → $BASE_BRANCH
+
+--- Commits ---
+$COMMIT_LOG
+
+--- git diff --stat ---
+$DIFF_STAT
+
+--- git diff ---
+$DIFF
+PROMPT
+)
+
+# ── Call Copilot Chat completions ─────────────────────────────────────────────
+
+info "Generating PR title and description…"
+
+payload=$(jq -n \
+  --arg prompt "$PROMPT" \
+  '{
+    model: "gpt-4o",
+    max_tokens: 512,
+    temperature: 0.2,
+    messages: [{ role: "user", content: $prompt }]
+  }')
+
+completion_response=$(curl -sf \
+  -X POST \
+  -H "Authorization: Bearer $COPILOT_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Editor-Version: Neovim/0.10.0" \
+  -H "Copilot-Integration-Id: copilot-chat" \
+  -d "$payload" \
+  "$COPILOT_CHAT_API") ||
+  die "Copilot Chat API request failed."
+
+GENERATED=$(echo "$completion_response" |
+  jq -r '.choices[0].message.content // empty' |
+  sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+
+if [[ -z "$GENERATED" ]]; then
+  die "Copilot returned an empty response."
+fi
+
+# ── Dry-run: just print and exit ──────────────────────────────────────────────
+
+if $DRY_RUN; then
+  echo ""
+  echo "── Generated PR ─────────────────────────────────────────────────────"
+  echo "$GENERATED"
+  echo "─────────────────────────────────────────────────────────────────────"
+  exit 0
+fi
+
+# ── Write temp file and open in EDITOR for review ────────────────────────────
+
+TMPFILE=$(mktemp "${TMPDIR:-/tmp}/git-pr-XXXXXX")
+trap 'rm -f "$TMPFILE"' EXIT
+
+cat >"$TMPFILE" <<EOF
+$GENERATED
+
+# ── Copilot-generated pull request ────────────────────────────────────────
+# First non-comment line is the PR title.  Everything below it (up to these
+# comments) becomes the PR body.  Wipe all non-comment lines to abort.
+#
+# Branch:  $CURRENT_BRANCH → $BASE_BRANCH
+#
+# Commits:
+$(git log --oneline "$BASE_BRANCH..HEAD" | sed 's/^/#   /')
+#
+# To regenerate: re-run $0
+EOF
+
+$EDITOR "$TMPFILE"
+
+# ── Parse title and body ──────────────────────────────────────────────────────
+
+# Strip comment lines
+CONTENT=$(grep -v '^#' "$TMPFILE")
+
+PR_TITLE=$(echo "$CONTENT" | awk 'NF{print; exit}')
+PR_BODY=$(echo "$CONTENT" | tail -n +2 | sed '/./,$!d' | sed 's/[[:space:]]*$//')
+
+if [[ -z "$PR_TITLE" ]]; then
+  info "Empty PR title — aborting."
+  exit 1
+fi
+
+# ── Create the PR ─────────────────────────────────────────────────────────────
+
+gh pr create \
+  --title "$PR_TITLE" \
+  --body "$PR_BODY" \
+  --base "$BASE_BRANCH" \
+  "${GH_FLAGS[@]}"
+
+ok "Pull request created."
