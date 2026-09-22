@@ -1,10 +1,11 @@
+tap "evilmarty/tap", trusted: true
+
 brew "coreutils"
 brew "gnu-sed"
 brew "bash"                      # Use latest bash
 brew "bash-completion"
 brew "git"
 brew "gh"                        # Replacement to hub
-brew "vim"                       # Don't use native vim
 brew "neovim"                    # Code editor of choice
 brew "tmux"
 brew "reattach-to-user-namespace" # Required to fix macos copy/paste in tmux
@@ -26,6 +27,9 @@ brew "zsh"                       # Use latest zsh
 brew "container"                 # Run linux containers on macOS using VMs
 brew "mole"                      # Deep clean and optimize your Mac
 brew "mactop"                    # Replacement to top and htop
+brew "evilmarty/tap/ilc"         # A simple CLI utility
+brew "evilmarty/tap/duex"        # Disk usage explorer
+brew "evilmarty/tap/lazycommit"  # Lazily create git commits
 
 # Terminal font with nerdfont support
 cask "font-fira-code-nerd-font"
@@ -34,7 +38,6 @@ cask "font-fira-mono-nerd-font"
 cask "syntax-highlight"          # Quickview code files
 cask "1password"                 # Password manager
 cask "1password-cli"             # CLI for 1Password
-cask "appcleaner"                # macOS Uninstaller
 cask "firefox"                   # The ONE web browser to rule them all
 cask "ghostty"                   # A better terminal app
 cask "qlmarkdown"                # Quickview markdown files

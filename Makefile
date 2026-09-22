@@ -10,7 +10,6 @@ homebrew:
 ifndef HOMEBREW
 	sh -c "$$(curl -fsSL $(HOMEBREW_INSTALL_URL))"
 endif
-	$(HOMEBREW) tap-info homebrew/bundle 2> /dev/null || $(HOMEBREW) tap homebrew/bundle
 	$(HOMEBREW) bundle --file .Brewfile
 
 ohmyzsh:
@@ -20,7 +19,7 @@ else
 	@echo "ZSH is already installed at $(ZSH)"
 endif
 
-install: homebrew gitconfig ohmyezsh
+install: homebrew gitconfig ohmyzsh
 
 update: homebrew
 
