@@ -25,6 +25,7 @@ brew "zoxide"                    # Better cd
 brew "gemini-cli"                # Google's coding model
 brew "zsh"                       # Use latest zsh
 brew "container"                 # Run linux containers on macOS using VMs
+brew "appautomaton/tap/docker-for-apple-container" # Docker shim for container
 brew "mole"                      # Deep clean and optimize your Mac
 brew "mactop"                    # Replacement to top and htop
 brew "evilmarty/tap/ilc"         # A simple CLI utility
